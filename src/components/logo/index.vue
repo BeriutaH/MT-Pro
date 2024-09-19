@@ -1,0 +1,34 @@
+<template>
+  <div class="logo">
+    <img src="../../../public/logo.png" alt="">
+    <p>宠物用品商城</p>
+  </div>
+</template>
+
+<script setup lang="ts">
+
+</script>
+
+<style scoped lang="scss">
+
+.logo {
+  width: 100%;
+  height: $base-logo-height;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  img{
+    width: $base-logo-height;
+    height: $base-logo-height;
+    border: 0.5px solid white; // 添加白色边框
+    border-radius: 50%; // 圆形边框
+    margin-top: 10px;
+    }
+  p {
+    font-size: $base-logo-title-font-size;
+    margin-left: 10px;
+    margin-top: 10px; // 向下移动5px
+  }
+}
+</style>

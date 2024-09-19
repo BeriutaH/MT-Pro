@@ -43,3 +43,5 @@ pnpm test:unit
 ```sh
 pnpm lint
 ```
+### 项目布局构图
+![示例图片](pro_file/images/project_layout.png)

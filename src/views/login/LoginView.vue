@@ -61,6 +61,39 @@ const loginRules =  reactive({
     { required: true, min: 8, max: 12, message: '长度不得小于8位，不得超出12位', trigger: 'blur' },
   ]
 })
+// const validatorUserName = (rule:any, value: any, callback: any) => {
+//   /*
+//   * rule: 即校验规则对象
+//   * value: 即为表单元素文本内容
+//   * callback: 如果符合条件callback放行通过, 如果不符合条件cal1Back方法，注入错误提示信息
+//   */
+//
+//   // console.log('规则', rule)
+//   // console.log('值', value)
+//   // console.log('回调', callback)
+//   if (value.length >= 5) {
+//     callback()
+//   } else {
+//     callback(new Error('账号长度至少5位'))
+//   }
+// }
+// const validatorPassword = (rule:any, value: any, callback: any) => {
+//   if (value.length >= 8) {
+//     callback()
+//   } else {
+//     callback(new Error('密码长度至少8位'))
+//   }
+// }
+//
+// //  自定义表单校验规则
+// const loginRules = {
+//   username: [
+//     {trigger: 'blur', validator: validatorUserName}
+//   ],
+//   password: [
+//     {trigger: 'blur', validator: validatorPassword}
+//   ]
+// }
 // 获取路由器
 const $router = useRouter()
 let loading = ref(false)

@@ -1,2 +1,16 @@
 //引入清除默认样式
 @import 'reset';
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: $top-color;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 10px;
+  background-color: $pink-color;
+  border-radius: 10px;
+}
