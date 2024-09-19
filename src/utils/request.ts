@@ -1,5 +1,6 @@
 // 对axios的二次封装: 使用请求与响应的拦截器等
 import axios from 'axios'
+import type { AxiosRequestConfig } from 'axios'
 
 // 基础配置
 const request = axios.create({
@@ -35,8 +36,8 @@ request.interceptors.response.use(
   (response) => {
     // 请求成功，对响应数据做些什么
     console.log('请求成功的回复')
-    // return response.data
-    return response
+    return response.data
+    // return response
   },
   (error) => {
     // 请求失败，处理Http网络错误
@@ -45,5 +46,10 @@ request.interceptors.response.use(
   }
 )
 
+// 封装泛型请求方法，允许调用时指定返回数据的类型
+const requestWrapper = <T = any>(config: AxiosRequestConfig): Promise<T> => {
+  return request(config);
+}
+
 // 对外暴露
-export default request
+export default requestWrapper

@@ -4,10 +4,10 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_from">
-          <h1>Hello</h1>
-          <h2>欢迎进入平台</h2>
-          <el-form-item>
+        <el-form class="login_from" :model="loginForm" :rules="loginRules" ref="loginRef">
+            <h1>Hello</h1>
+            <h2>欢迎进入平台</h2>
+          <el-form-item prop="username">
             <!-- 输入的用户名 -->
             <el-input
               :prefix-icon="UserFilled"
@@ -15,7 +15,7 @@
               placeholder="请输入用户名"
             ></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <!-- 输入的密码 -->
             <el-input
               :prefix-icon="Lock"
@@ -38,6 +38,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { getTime } from '@/utils/time'
 // 消息提示窗
 import { ElNotification } from 'element-plus'
 // 引入用户相关的小仓库
@@ -50,15 +51,28 @@ const loginForm = reactive({
   username: 'admin',
   password: 'admin12'
 })
+
+//  定义登录表单校验规则
+const loginRules =  reactive({
+  username:[
+    { required: true, min: 3, max: 10, message: '长度不得小于3位，不得超出10位', trigger: 'blur' },
+  ],
+  password:[
+    { required: true, min: 8, max: 12, message: '长度不得小于8位，不得超出12位', trigger: 'blur' },
+  ]
+})
 // 获取路由器
 const $router = useRouter()
 let loading = ref(false)
+let loginRef = ref()
 const handleLogin = async () => {
   /*
   * 点击登录按钮，通知仓库发送登录请求
   * 请求成功-> 首页展示数据
   * 请求失败-> 弹出请求失败信息
   */
+  // 只有所有表单校验通过后才会发送请求
+  await loginRef.value.validate()
   loading.value = true  // 让登录按钮转圈
   console.log('登录信息', loginForm)
   // const loginRes = useStore.userLogin(loginForm)
@@ -72,7 +86,8 @@ const handleLogin = async () => {
     // 弹出成功信息
     ElNotification({
       type: 'success',
-      message: '登录成功'
+      message: '登录成功',
+      title: `HI, ${getTime()}`
     })
   } catch (error) {
     // 加载效果消失
@@ -84,6 +99,7 @@ const handleLogin = async () => {
     })
   }
 }
+
 </script>
 
 <style scoped lang="scss">
@@ -102,10 +118,14 @@ const handleLogin = async () => {
     background-color: rgba(255, 255, 255, 0.4); /* 确保背景色可见 */
     margin-left: 30%; /* 增加左侧空白，将元素右移 */
     h1 {
-      color: #295f5f;
+      color: $primary-color;
+      font-size: 2rem; // 调整字体大小
+      font-weight: bold; // 设置为粗体
+      margin-bottom: 15px;
     }
     h2 {
-      color: #295f5f;
+      color: $primary-color;
+      margin-bottom: 10px;
     }
   }
   .login_btn {

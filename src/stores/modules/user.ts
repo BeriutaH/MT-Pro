@@ -2,11 +2,11 @@
 import { defineStore } from 'pinia'
 import type { LoginFrom } from '@/api/user/type'
 import { reqLogin } from '@/api/user'
-import type { ApiResponse } from '@/api/user/type'
+import type { UserState } from '@/stores/modules/types/type'
 
 const useUserStore = defineStore('User', {
   // 小仓库存储数据的地方
-  state: () => {
+  state: ():UserState => {
     return {
       token: localStorage.getItem('TOKEN')  // 用户唯一标识
     }
@@ -16,20 +16,18 @@ const useUserStore = defineStore('User', {
     // async 会返回函数执行的结果
     async userLogin(data:LoginFrom) {
       console.log("触发小仓库登录方法", data)
-      const result = await reqLogin(data)
+      const result= await reqLogin(data)
       console.log(result)
-      const resp = result.data as ApiResponse // 确保类型为 ApiResponse
       // 返回200，存储token
       // 失败401，登录失败错误信息
-      console.log(resp)
-      if (resp.code == 200) {
-        this.token = resp.data.token
+      if (result.code == 200) {
+        this.token = result.data.token
         // 本地存储持久化
-        localStorage.setItem("TOKEN", resp.data.token)
+        localStorage.setItem("TOKEN", result.data.token)
         // 保证当前async函数返回一个成功的promise
         return 'ok'
       } else {
-        return Promise.reject(new Error(resp.message))
+        return Promise.reject(new Error(result.message))
       }
     }
   },

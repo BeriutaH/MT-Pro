@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 // import { createPinia } from 'pinia'
 import pinia from '@/stores'
+// 注册全局样式
+import '@/styles/index.scss'
 // 引入插件与样式
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
