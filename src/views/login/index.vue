@@ -5,8 +5,8 @@
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
         <el-form class="login_from" :model="loginForm" :rules="loginRules" ref="loginRef">
-            <h1>Hello</h1>
-            <h2>欢迎进入平台</h2>
+          <h1>Hello</h1>
+          <h2>欢迎进入平台</h2>
           <el-form-item prop="username">
             <!-- 输入的用户名 -->
             <el-input
@@ -26,7 +26,12 @@
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button :loading="loading" class="login_btn" type="primary" size="default" @click="handleLogin"
+            <el-button
+              :loading="loading"
+              class="login_btn"
+              type="primary"
+              size="default"
+              @click="handleLogin"
               >登录</el-button
             >
           </el-form-item>
@@ -44,7 +49,7 @@ import { ElNotification } from 'element-plus'
 // 引入用户相关的小仓库
 import useUserStore from '@/stores/modules/user'
 const useStore = useUserStore()
-console.log("小仓库", useStore)
+console.log('小仓库', useStore)
 import { UserFilled, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 const loginForm = reactive({
@@ -53,12 +58,12 @@ const loginForm = reactive({
 })
 
 //  定义登录表单校验规则
-const loginRules =  reactive({
-  username:[
-    { required: true, min: 3, max: 10, message: '长度不得小于3位，不得超出10位', trigger: 'blur' },
+const loginRules = reactive({
+  username: [
+    { required: true, min: 3, max: 10, message: '长度不得小于3位，不得超出10位', trigger: 'blur' }
   ],
-  password:[
-    { required: true, min: 8, max: 12, message: '长度不得小于8位，不得超出12位', trigger: 'blur' },
+  password: [
+    { required: true, min: 8, max: 12, message: '长度不得小于8位，不得超出12位', trigger: 'blur' }
   ]
 })
 // const validatorUserName = (rule:any, value: any, callback: any) => {
@@ -100,13 +105,13 @@ let loading = ref(false)
 let loginRef = ref()
 const handleLogin = async () => {
   /*
-  * 点击登录按钮，通知仓库发送登录请求
-  * 请求成功-> 首页展示数据
-  * 请求失败-> 弹出请求失败信息
-  */
+   * 点击登录按钮，通知仓库发送登录请求
+   * 请求成功-> 首页展示数据
+   * 请求失败-> 弹出请求失败信息
+   */
   // 只有所有表单校验通过后才会发送请求
   await loginRef.value.validate()
-  loading.value = true  // 让登录按钮转圈
+  loading.value = true // 让登录按钮转圈
   console.log('登录信息', loginForm)
   // const loginRes = useStore.userLogin(loginForm)
   // console.log(loginRes)
@@ -115,7 +120,7 @@ const handleLogin = async () => {
     // 加载效果消失
     loading.value = false
     // 跳转首页
-    await $router.push('/home')
+    await $router.push('/menu')
     // 弹出成功信息
     ElNotification({
       type: 'success',
@@ -132,7 +137,6 @@ const handleLogin = async () => {
     })
   }
 }
-
 </script>
 
 <style scoped lang="scss">

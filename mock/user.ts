@@ -10,7 +10,7 @@ const users = [
       desc: '系统超级管理员',
       roles: ['系统超级管理员'],
       buttons: ['admin.detail', 'admin.manage'],
-      routes: ['home', 'dashboard'],
+      routes: ['menu', 'dashboard'],
       token: 'Admin Token'
     },
     {
@@ -21,7 +21,7 @@ const users = [
       desc: '系统管理员',
       roles: ['系统管理员'],
       buttons: ['cuser.detail', 'cuser.user'],
-      routes: ['home'],
+      routes: ['menu'],
       token: 'System Token'
     },
     {
@@ -32,7 +32,7 @@ const users = [
       desc: '普通用户',
       roles: ['用户'],
       buttons: ['user.view'],
-      routes: ['home', 'profile'],
+      routes: ['menu', 'profile'],
       token: 'User1 Token'
     },
     {
@@ -43,7 +43,7 @@ const users = [
       desc: '访客',
       roles: ['访客'],
       buttons: [],
-      routes: ['home'],
+      routes: ['menu'],
       token: 'Guest Token'
     },
     {
@@ -54,7 +54,7 @@ const users = [
       desc: '系统操作员',
       roles: ['操作员'],
       buttons: ['operator.run', 'operator.stop'],
-      routes: ['home', 'operations'],
+      routes: ['menu', 'operations'],
       token: 'Operator Token'
     }
 ];

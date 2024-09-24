@@ -48,7 +48,7 @@ request.interceptors.response.use(
 
 // 封装泛型请求方法，允许调用时指定返回数据的类型
 const requestWrapper = <T = any>(config: AxiosRequestConfig): Promise<T> => {
-  return request(config);
+  return request(config)
 }
 
 // 对外暴露
