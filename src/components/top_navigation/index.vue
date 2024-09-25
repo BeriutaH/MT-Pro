@@ -1,24 +1,19 @@
 <template>
-<div class="navigation">
-  <!-- 顶部左侧 -->
-  <div class="navigation_left">
-    <!-- 顶部左侧静态  -->
-    <el-icon>
-      <Expand />
-    </el-icon>
-    <!--  顶部面包屑  -->
-    <el-breadcrumb separator-icon="ArrowRight">
-      <el-breadcrumb-item>角色管理</el-breadcrumb-item>
-      <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-    </el-breadcrumb>
+  <div class="navigation">
+    <!-- 顶部左侧 -->
+    <div class="navigation_left">
+      <Breadcrumb />
+    </div>
+    <!-- 顶部右侧 -->
+    <div class="navigation_right">
+      <TopSetting />
+    </div>
   </div>
-  <!-- 顶部右侧 -->
-  <div class="navigation_right">456</div>
-</div>
 </template>
 
 <script setup lang="ts">
-
+import Breadcrumb from '@/components/top_navigation/breadcrumb/index.vue'
+import TopSetting from '@/components/top_navigation/top_settings/index.vue'
 </script>
 
 <style scoped lang="scss">
@@ -30,5 +25,15 @@
 }
 .navigation_left {
   display: flex;
+  align-items: center; /* 竖着居中 */
+  padding-left: 10px;
+}
+.navigation_right {
+  display: flex;
+  align-items: center;
+  transform: translateX(-15px); /* 向左移动10px */
+  :deep(.el-button) {
+    background-color: $top-color;
+  }
 }
 </style>

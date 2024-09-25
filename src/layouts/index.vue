@@ -1,6 +1,7 @@
 <template>
   <div class="layout_container">
-    <div class="layout_slider">
+    <!-- 左侧菜单栏 -->
+    <div class="layout_slider" :class="{ fold: settingStore.shrinkIcon }">
       <Logo></Logo>
       <!-- 展示菜单 -->
       <!-- 滚动组件 -->
@@ -12,6 +13,7 @@
           text-color="white"
           active-text-color="#f4b8e4"
           :default-active="$route.path"
+          :collapse="settingStore.shrinkIcon"
         >
           <!-- 根据动态生成菜单 Menu为子组件-->
           <DynamicMenu :menuList="useStore.menuRouters"></DynamicMenu>
@@ -19,11 +21,11 @@
       </el-scrollbar>
     </div>
     <!-- 顶部导航 -->
-    <div class="layout_top_navigation">
+    <div class="layout_top_navigation" :class="{ fold: settingStore.shrinkIcon }">
       <TopNavigation></TopNavigation>
     </div>
     <!-- 中间内容区域 -->
-    <div class="layout_main">
+    <div class="layout_main" :class="{ fold: settingStore.shrinkIcon }">
       <Main></Main>
     </div>
   </div>
@@ -37,7 +39,9 @@ import Main from '@/components/main/index.vue'
 import TopNavigation from '@/components/top_navigation/index.vue'
 // 获取小仓库存储的数据
 import useUserStore from '@/stores/modules/user'
+import userSettingStore from '@/stores/modules/setting'
 const useStore = useUserStore()
+const settingStore = userSettingStore()
 // 获取路由对象
 const $route = useRoute()
 </script>
@@ -55,6 +59,11 @@ const $route = useRoute()
   background: $top-color;
   top: 0;
   left: $base-menu-width;
+  transition: all 0.3s;
+  &.fold {
+    width: calc(100% - $base-menu-min-width);
+    left: $base-menu-min-width;
+  }
 }
 .layout_main {
   position: absolute;
@@ -66,12 +75,18 @@ const $route = useRoute()
   padding: 20px;
   overflow: auto; /* 背景跟随滚动 */
   color: white;
+  transition: all 0.3s;
   //overflow-y: scroll;  /* 始终显示垂直滚动条 */
+  &.fold {
+    width: calc(100% - $base-menu-min-width);
+    left: $base-menu-min-width;
+  }
 }
 .layout_slider {
   width: $base-menu-width;
   height: 100vh;
   background: $primary-color;
+  transition: all 0.3s;
   .scrollbar {
     width: 100%;
     height: calc(100vh - $base-logo-height); /* 避免滚动条撑出去 */
@@ -79,7 +94,11 @@ const $route = useRoute()
       border-right: none; /* 将左侧菜单边框隐身 */
     }
   }
+  &.fold {
+    width: $base-menu-min-width;
+  }
 }
+
 /* 注意标签的优先级 */
 //.menu {
 //  background-color: $primary-color;

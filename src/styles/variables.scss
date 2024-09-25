@@ -5,8 +5,10 @@ $light-color: #99d1db; // 浅色系
 $top-color: #dbf0f0; // 浅色系
 $pink-color: #f4b8e4;
 
-//  左侧栏菜单跨度
+// 左侧栏菜单宽度
 $base-menu-width: 240px;
+// 缩小时剩余的宽度
+$base-menu-min-width:44px;
 
 // 顶部导航高度
 $base-top-navigation-height: 50px;

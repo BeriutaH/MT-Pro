@@ -1,5 +1,5 @@
 <template>
-  <div class="logo">
+  <div class="logo" :class="{ fold: settingStore.shrinkIcon }">
     <img :src="Setting.logo" v-if="Setting.logoHidden" alt="" />
     <p>{{ Setting.title }}</p>
   </div>
@@ -7,6 +7,8 @@
 
 <script setup lang="ts">
 import Setting from '@/config/setting'
+import userSettingStore from '@/stores/modules/setting'
+const settingStore = userSettingStore()
 </script>
 
 <style scoped lang="scss">
@@ -17,6 +19,9 @@ import Setting from '@/config/setting'
   display: flex;
   align-items: center;
   padding: 20px;
+  &.fold {
+    padding: 0;
+  }
   img {
     width: $base-logo-height;
     height: $base-logo-height;
