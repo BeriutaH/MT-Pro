@@ -14,25 +14,26 @@ const settingStore = userSettingStore()
 <style scoped lang="scss">
 .logo {
   width: 100%;
-  height: $base-logo-height;
   color: white;
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 10px 20px 4px;
+  gap: 10px;
+  transition: 0.3s;
   &.fold {
-    padding: 0;
+    padding: 10px 2px 4px;
+    transform: scale(0.8);
   }
   img {
     width: $base-logo-height;
     height: $base-logo-height;
     border: 0.5px solid white; // 添加白色边框
     border-radius: 50%; // 圆形边框
-    margin-top: 10px;
   }
   p {
     font-size: $base-logo-title-font-size;
-    margin-left: 10px;
-    margin-top: 10px; // 向下移动5px
+    overflow: hidden;
+    white-space: nowrap;
   }
 }
 </style>

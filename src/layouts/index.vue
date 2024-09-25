@@ -94,8 +94,32 @@ const $route = useRoute()
       border-right: none; /* 将左侧菜单边框隐身 */
     }
   }
+  & {
+    &:deep(.el-tooltip__trigger),
+    &:deep(.el-menu-item),
+    &:deep(.el-sub-menu__title),
+    &:deep(.el-menu.el-menu--inline) {
+      transition: 0.3s;
+    }
+  }
   &.fold {
     width: $base-menu-min-width;
+    &:deep(.el-tooltip__trigger),
+    &:deep(.el-menu-item),
+    &:deep(.el-sub-menu__title) {
+      padding-left: 9px;
+    }
+    &:deep(.el-menu.el-menu--inline) {
+      height: 0;
+      overflow: hidden;
+    }
+    &:deep(.el-menu-item),
+    &:deep(.el-sub-menu__title) {
+      & > span {
+        transition: 0.3s;
+        opacity: 0;
+      }
+    }
   }
 }
 
