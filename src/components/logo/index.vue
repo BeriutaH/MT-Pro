@@ -7,8 +7,8 @@
 
 <script setup lang="ts">
 import Setting from '@/config/setting'
-import userSettingStore from '@/stores/modules/setting'
-const settingStore = userSettingStore()
+import useSettingStore from '@/stores/modules/setting'
+const settingStore = useSettingStore()
 </script>
 
 <style scoped lang="scss">

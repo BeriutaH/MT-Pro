@@ -39,9 +39,9 @@ import Main from '@/components/main/index.vue'
 import TopNavigation from '@/components/top_navigation/index.vue'
 // 获取小仓库存储的数据
 import useUserStore from '@/stores/modules/user'
-import userSettingStore from '@/stores/modules/setting'
+import useSettingStore from '@/stores/modules/setting'
 const useStore = useUserStore()
-const settingStore = userSettingStore()
+const settingStore = useSettingStore()
 // 获取路由对象
 const $route = useRoute()
 </script>
