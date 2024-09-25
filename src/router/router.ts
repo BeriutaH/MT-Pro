@@ -8,11 +8,21 @@ export const routers = [
       hidden: true // 是否要隐藏
     }
   },
+  /* 所有首页的路由跳转，权限 */
   {
-    path: '/menu',
+    path: '/home',
     name: 'home',
-    component: () => import('@/layouts/index.vue'),
-    meta: { title: '首页', hidden: false, icon: 'HomeFilled' }
+    component: () => import('@/layouts/index.vue'), // 一级路由组件
+    meta: { title: '', hidden: false, icon: '' },
+    redirect: '/menu',
+    children: [
+      {
+        path: '/menu',
+        name: 'menu',
+        component: () => import('@/views/home/index.vue'),
+        meta: { title: '首页', hidden: false, icon: 'HomeFilled' }
+      }
+    ]
   },
   {
     path: '/dashboard',
@@ -25,6 +35,7 @@ export const routers = [
     name: 'Acl',
     component: () => import('@/layouts/index.vue'), // 一级路由组件
     meta: { title: '权限管理', hidden: false, icon: 'Management' },
+    redirect: '/acl/user',
     children: [
       {
         path: '/acl/user',
@@ -51,6 +62,7 @@ export const routers = [
     name: 'Product',
     component: () => import('@/layouts/index.vue'), // 一级路由组件
     meta: { title: '商品管理', hidden: false, icon: 'Shop' },
+    redirect: '/product/attr',
     children: [
       {
         path: '/product/attr',

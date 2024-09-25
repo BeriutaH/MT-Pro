@@ -120,7 +120,7 @@ const handleLogin = async () => {
     // 加载效果消失
     loading.value = false
     // 跳转首页
-    await $router.push('/menu')
+    await $router.push('/home')
     // 弹出成功信息
     ElNotification({
       type: 'success',

@@ -14,12 +14,12 @@
 
     <!--    只有一个子路由-->
     <template v-if="route.children && route.children.length == 1">
-      <el-menu-item v-if="!route.children[0].meta.hidden" :index="route.children[0].path">
+      <el-menu-item v-if="!route.children[0].meta.hidden" :index="route.children[0].path" @click="goRoute">
         <el-icon>
           <component :is="route.children[0].meta.icon"></component>
         </el-icon>
         <template #title>
-          <span>{{ route.children[0].meta.title }}啊啊啊啊啊啊啊啊啊啊</span>
+          <span>{{ route.children[0].meta.title }}</span>
         </template>
       </el-menu-item>
     </template>
