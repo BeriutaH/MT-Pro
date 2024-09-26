@@ -14,7 +14,11 @@
 
     <!--    只有一个子路由-->
     <template v-if="route.children && route.children.length == 1">
-      <el-menu-item v-if="!route.children[0].meta.hidden" :index="route.children[0].path" @click="goRoute">
+      <el-menu-item
+        v-if="!route.children[0].meta.hidden"
+        :index="route.children[0].path"
+        @click="goRoute"
+      >
         <el-icon>
           <component :is="route.children[0].meta.icon"></component>
         </el-icon>

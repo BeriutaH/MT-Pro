@@ -1,6 +1,7 @@
 // 对axios的二次封装: 使用请求与响应的拦截器等
 import axios from 'axios'
 import type { AxiosRequestConfig } from 'axios'
+import useUserStore from '@/stores/modules/user'
 
 // 基础配置
 const request = axios.create({
@@ -48,6 +49,15 @@ request.interceptors.response.use(
 
 // 封装泛型请求方法，允许调用时指定返回数据的类型
 const requestWrapper = <T = any>(config: AxiosRequestConfig): Promise<T> => {
+  const userStore = useUserStore()
+  const token = userStore.token
+  console.log("token", token)
+  if (token) {
+    config.headers = {
+      ...config.headers,
+      Authorization: token, // 在 headers 中添加 token
+    };
+  }
   return request(config)
 }
 

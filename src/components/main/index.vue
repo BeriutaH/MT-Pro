@@ -21,18 +21,21 @@ import { watch, ref, nextTick } from 'vue'
 import useSettingStore from '@/stores/modules/setting'
 const settingStore = useSettingStore()
 // 控制当前组件是否销毁重建
-let flag = ref(true)  // 默认true为展示
+let flag = ref(true) // 默认true为展示
 
 //  监听仓库内部数据是否发生变化，如果发生变化，说明用户点击刷新按钮
-watch(()=> settingStore.refresh, ()=>{
-  // 销毁再创建组件，v-if
-  flag.value = false
-  // 异步方法 nextTick 等到所有的 DOM 响应式数据变化完成后再一次性更新视图
-  nextTick(()=>{
-    // 再次触发 v-if 使组件重新渲染
-    flag.value = true
-  })
-})
+watch(
+  () => settingStore.refresh,
+  () => {
+    // 销毁再创建组件，v-if
+    flag.value = false
+    // 异步方法 nextTick 等到所有的 DOM 响应式数据变化完成后再一次性更新视图
+    nextTick(() => {
+      // 再次触发 v-if 使组件重新渲染
+      flag.value = true
+    })
+  }
+)
 </script>
 
 <style scoped lang="scss">

@@ -7,7 +7,12 @@
   <!--  顶部面包屑  -->
   <el-breadcrumb separator-icon="ArrowRight">
     <!--  动态获取路由以及图标,$route.matched能获取到路由的所有信息  -->
-    <el-breadcrumb-item v-for="(item, index) in $route.matched" :key="index" v-show="item.meta.title" :to="item.path">
+    <el-breadcrumb-item
+      v-for="(item, index) in $route.matched"
+      :key="index"
+      v-show="item.meta.title"
+      :to="item.path"
+    >
       <!-- 图标 -->
       <el-icon>
         <component :is="item.meta.icon"></component>
@@ -20,18 +25,16 @@
 
 <script setup lang="ts">
 import userSettingStore from '@/stores/modules/setting'
-import  { useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 // 获取配置相关仓库
 let settingIcon = userSettingStore()
 
-
 const changeIcon = () => {
   console.log('是否收缩', settingIcon.shrinkIcon)
-  settingIcon.shrinkIcon= !settingIcon.shrinkIcon
+  settingIcon.shrinkIcon = !settingIcon.shrinkIcon
 }
 
 const $route = useRoute()
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

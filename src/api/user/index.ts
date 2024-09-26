@@ -5,7 +5,8 @@ import requestWrapper from '@/utils/request'
 const BaseURL = '/api'
 export const API_PATHS = {
   LOGIN: BaseURL + '/login',
-  USER_INFO: BaseURL + '/users'
+  USERS: BaseURL + '/users',
+  USER_INFO: BaseURL + '/user/info'
 }
 // 用户登录
 export const reqLogin = (data: LoginFrom): Promise<ApiResponse> => {
@@ -16,7 +17,7 @@ export const reqLogin = (data: LoginFrom): Promise<ApiResponse> => {
   })
 }
 
-// 获取用户信息
+// // 获取用户信息
 // export const getUserInfo() {
 //   try {
 //     // 从 localStorage 获取 token
@@ -27,10 +28,10 @@ export const reqLogin = (data: LoginFrom): Promise<ApiResponse> => {
 //       return
 //     }
 //     // 设置请求头
-//     request.defaults.headers.common['Authorization'] = authToken
+//     requestWrapper.defaults.headers.common['Authorization'] = authToken
 //
 //     // 请求用户信息
-//     const response = await request.get(API_PATHS.USER_INFO)
+//     const response = await request.get(API_PATHS   USERS)
 //     return response.data
 //   } catch (error) {
 //     // 清除 token 并抛出错误
@@ -39,3 +40,11 @@ export const reqLogin = (data: LoginFrom): Promise<ApiResponse> => {
 //
 //   }
 // }
+
+// 获取指定用户信息的头像，名称
+export const reqUserInfo = (): Promise<ApiResponse> => {
+  return requestWrapper<ApiResponse>({
+    url: API_PATHS.USER_INFO,
+    method: 'GET'
+  })
+}

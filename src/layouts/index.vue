@@ -109,7 +109,7 @@ const $route = useRoute()
     &:deep(.el-tooltip__trigger),
     &:deep(.el-menu-item),
     &:deep(.el-sub-menu__title) {
-      padding-left: 9px;  // 设置这些元素在折叠状态下的左内边距为 9px，以保证菜单项在折叠时有适当的间距
+      padding-left: 9px; // 设置这些元素在折叠状态下的左内边距为 9px，以保证菜单项在折叠时有适当的间距
     }
     //&:deep(.el-menu.el-menu--inline) {
     //  height: 0;  // 将菜单的高度设为 0，意味着菜单会被隐藏
