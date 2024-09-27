@@ -50,7 +50,7 @@ const $route = useRoute()
 .layout_container {
   width: 100%;
   height: 100vh;
-  background: #99d1db;
+  background: $light-color;
 }
 .layout_top_navigation {
   position: fixed; /* 相对定位 */
@@ -69,12 +69,12 @@ const $route = useRoute()
   position: absolute;
   width: calc(100% - $base-menu-width);
   height: calc(100vh - $base-top-navigation-height);
-  background: $medium-color;
+  //background: $medium-color;
   left: $base-menu-width;
   top: $base-top-navigation-height;
   padding: 20px;
   overflow: auto; /* 背景跟随滚动 */
-  color: white;
+  //color: white;
   transition: all 0.3s;
   //overflow-y: scroll;  /* 始终显示垂直滚动条 */
   &.fold {
@@ -92,6 +92,7 @@ const $route = useRoute()
     height: calc(100vh - $base-logo-height); /* 避免滚动条撑出去 */
     .el-menu {
       border-right: none; /* 将左侧菜单边框隐身 */
+      margin-top: 3px; /* 下移 3px */
     }
   }
   /* 这个 & 指代当前的父选择器，也就是说，& 在这里相当于父选择器的占位符。它确保这些嵌套的样式定义是在父元素上下文中应用的 */

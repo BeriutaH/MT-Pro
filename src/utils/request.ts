@@ -5,7 +5,7 @@ import useUserStore from '@/stores/modules/user'
 
 // 基础配置
 const request = axios.create({
-  baseURL: import.meta.env.BASE_URL, // 基础路径
+  baseURL: import.meta.env.VITE_SERVE, // 基础路径
   timeout: 5000 // 超时时间5秒
 })
 
@@ -20,7 +20,7 @@ request.interceptors.request.use(
     // if (authToken) {
     //   config.headers.Authorization = authToken
     // }
-    console.log('请求接口')
+    console.log('请求接口token', config.headers.Authorization)
 
     // 返回配置对象
     return config
@@ -51,12 +51,13 @@ request.interceptors.response.use(
 const requestWrapper = <T = any>(config: AxiosRequestConfig): Promise<T> => {
   const userStore = useUserStore()
   const token = userStore.token
-  console.log("token", token)
+  console.log('token', token)
   if (token) {
     config.headers = {
       ...config.headers,
-      Authorization: token, // 在 headers 中添加 token
-    };
+      // Authorization: token // 在 headers 中添加 token
+      token: token // 正式平台 在 headers 中添加 token
+    }
   }
   return request(config)
 }

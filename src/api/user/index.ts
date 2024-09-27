@@ -1,12 +1,12 @@
 // 统一管理项目用户相关的接口
 import type { ApiResponse, LoginFrom } from '@/api/user/type'
 import requestWrapper from '@/utils/request'
-// 统一管理接口
-const BaseURL = '/api'
+import ApiSetting from '@/api'
+
 export const API_PATHS = {
-  LOGIN: BaseURL + '/login',
-  USERS: BaseURL + '/users',
-  USER_INFO: BaseURL + '/user/info'
+  LOGIN: ApiSetting.UserBaseURL+ '/login',
+  USER_INFO: ApiSetting.UserBaseURL + '/info',
+  LOGOUT: ApiSetting.UserBaseURL + '/logout'
 }
 // 用户登录
 export const reqLogin = (data: LoginFrom): Promise<ApiResponse> => {
@@ -46,5 +46,13 @@ export const reqUserInfo = (): Promise<ApiResponse> => {
   return requestWrapper<ApiResponse>({
     url: API_PATHS.USER_INFO,
     method: 'GET'
+  })
+}
+
+// 用户退出
+export const reqLogout = (): Promise<ApiResponse> => {
+  return requestWrapper<ApiResponse>({
+    url: API_PATHS.LOGOUT,
+    method: 'POST'
   })
 }

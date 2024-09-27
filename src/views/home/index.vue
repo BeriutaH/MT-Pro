@@ -1,5 +1,5 @@
 <template>
-  <div>我是首页{{userStore.username}}</div>
+  <div>我是首页{{ userStore.username }}</div>
 </template>
 
 <script setup lang="ts">
@@ -12,8 +12,8 @@ const userStore = useUserStore()
 onMounted(() => {
   userStore.userInfo()
 })
-console.log('打印小仓库用户的数据',userStore.username)
-console.log('打印小仓库用户的数据',userStore.avatar)
+console.log('打印小仓库用户的数据', userStore.username)
+console.log('打印小仓库用户的数据', userStore.avatar)
 </script>
 
 <style scoped lang="scss"></style>

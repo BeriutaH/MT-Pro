@@ -4,9 +4,9 @@ import { MockMethod } from 'vite-plugin-mock';
 const users = [
     {
       userId: 1,
-      avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+      avatar: '/public/dog.jpg',
       username: 'admin',
-      password: 'admin123',
+      password: '111111',
       desc: '系统超级管理员',
       roles: ['系统超级管理员'],
       buttons: ['admin.detail', 'admin.manage'],
@@ -15,7 +15,7 @@ const users = [
     },
     {
       userId: 2,
-      avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+      avatar: '/public/lamp.jpg',
       username: 'system',
       password: '111111',
       desc: '系统管理员',
@@ -26,7 +26,7 @@ const users = [
     },
     {
       userId: 3,
-      avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+      avatar: '/public/mountain.jpg',
       username: 'user1',
       password: 'user123',
       desc: '普通用户',

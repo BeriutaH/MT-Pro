@@ -1,7 +1,7 @@
 // 用户相关的小仓库
 import { defineStore } from 'pinia'
 import type { LoginFrom } from '@/api/user/type'
-import { reqLogin, reqUserInfo } from '@/api/user'
+import { reqLogin, reqUserInfo, reqLogout } from '@/api/user'
 import type { UserState } from '@/stores/modules/types/type'
 import { routers } from '@/router/router'
 
@@ -11,7 +11,7 @@ const useUserStore = defineStore('User', {
     return {
       token: localStorage.getItem('TOKEN'), // 用户唯一标识
       menuRouters: routers, // 仓库存储生成菜单
-      username:null,
+      username: null,
       avatar: null
     }
   },
@@ -25,9 +25,9 @@ const useUserStore = defineStore('User', {
       // 返回200，存储token
       // 失败401，登录失败错误信息
       if (result.code == 200) {
-        this.token = result.data.token
+        this.token = result.data
         // 本地存储持久化
-        localStorage.setItem('TOKEN', result.data.token)
+        localStorage.setItem('TOKEN', result.data)
         // 保证当前async函数返回一个成功的promise
         return 'ok'
       } else {
@@ -40,12 +40,29 @@ const useUserStore = defineStore('User', {
       const result = await reqUserInfo()
       console.log(result)
       if (result.code == 200) {
-        this.username = result.data.username
+        this.username = result.data.name
         this.avatar = result.data.avatar
         return 'ok'
       } else {
         return Promise.reject(new Error(result.message))
       }
+    },
+    // 退出登录
+    async userLogout() {
+      const result = await reqLogout()
+      console.log(result)
+
+      if (result.code == 200) {
+        // 清除用户所有的信息
+        this.username = null
+        this.avatar = null
+        this.token = null
+        localStorage.removeItem('TOKEN')
+        return 'ok'
+      }else {
+        return Promise.reject(new Error(result.message))
+      }
+
     }
   },
   // 处理计算属性

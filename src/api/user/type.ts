@@ -2,7 +2,8 @@
 export interface ApiResponse {
   code: number
   message: string
-  data: Record<string, any> // data 是一个动态键的对象
+  data: any // data 是一个动态键的对象
+  ok:boolean
 }
 
 export interface LoginFrom {
