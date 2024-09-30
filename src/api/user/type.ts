@@ -3,7 +3,7 @@ export interface ApiResponse {
   code: number
   message: string
   data: any // data 是一个动态键的对象
-  ok:boolean
+  ok: boolean
 }
 
 export interface LoginFrom {

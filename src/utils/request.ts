@@ -5,8 +5,8 @@ import useUserStore from '@/stores/modules/user'
 
 // 基础配置
 const request = axios.create({
-  baseURL: import.meta.env.VITE_SERVE, // 基础路径
-  timeout: 5000 // 超时时间5秒
+  baseURL: import.meta.env.VITE_SERVE // 基础路径
+  // timeout: 5000 // 超时时间5秒
 })
 
 // 请求拦截器
@@ -20,8 +20,6 @@ request.interceptors.request.use(
     // if (authToken) {
     //   config.headers.Authorization = authToken
     // }
-    console.log('请求接口token', config.headers.Authorization)
-
     // 返回配置对象
     return config
   },

@@ -59,10 +59,9 @@ const useUserStore = defineStore('User', {
         this.token = null
         localStorage.removeItem('TOKEN')
         return 'ok'
-      }else {
+      } else {
         return Promise.reject(new Error(result.message))
       }
-
     }
   },
   // 处理计算属性

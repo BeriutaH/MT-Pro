@@ -4,7 +4,7 @@ import requestWrapper from '@/utils/request'
 import ApiSetting from '@/api'
 
 export const API_PATHS = {
-  LOGIN: ApiSetting.UserBaseURL+ '/login',
+  LOGIN: ApiSetting.UserBaseURL + '/login',
   USER_INFO: ApiSetting.UserBaseURL + '/info',
   LOGOUT: ApiSetting.UserBaseURL + '/logout'
 }
