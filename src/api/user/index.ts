@@ -1,11 +1,12 @@
 // 统一管理项目用户相关的接口
 import type { ApiResponse, LoginFrom } from '@/api/user/type'
 import requestWrapper from '@/utils/request'
-// 统一管理接口
-const BaseURL = '/api'
+import ApiSetting from '@/api'
+
 export const API_PATHS = {
-  LOGIN: BaseURL + '/login',
-  USER_INFO: BaseURL + '/users'
+  LOGIN: ApiSetting.UserBaseURL + '/login',
+  USER_INFO: ApiSetting.UserBaseURL + '/info',
+  LOGOUT: ApiSetting.UserBaseURL + '/logout'
 }
 // 用户登录
 export const reqLogin = (data: LoginFrom): Promise<ApiResponse> => {
@@ -16,7 +17,7 @@ export const reqLogin = (data: LoginFrom): Promise<ApiResponse> => {
   })
 }
 
-// 获取用户信息
+// // 获取用户信息
 // export const getUserInfo() {
 //   try {
 //     // 从 localStorage 获取 token
@@ -27,10 +28,10 @@ export const reqLogin = (data: LoginFrom): Promise<ApiResponse> => {
 //       return
 //     }
 //     // 设置请求头
-//     request.defaults.headers.common['Authorization'] = authToken
+//     requestWrapper.defaults.headers.common['Authorization'] = authToken
 //
 //     // 请求用户信息
-//     const response = await request.get(API_PATHS.USER_INFO)
+//     const response = await request.get(API_PATHS   USERS)
 //     return response.data
 //   } catch (error) {
 //     // 清除 token 并抛出错误
@@ -39,3 +40,19 @@ export const reqLogin = (data: LoginFrom): Promise<ApiResponse> => {
 //
 //   }
 // }
+
+// 获取指定用户信息的头像，名称
+export const reqUserInfo = (): Promise<ApiResponse> => {
+  return requestWrapper<ApiResponse>({
+    url: API_PATHS.USER_INFO,
+    method: 'GET'
+  })
+}
+
+// 用户退出
+export const reqLogout = (): Promise<ApiResponse> => {
+  return requestWrapper<ApiResponse>({
+    url: API_PATHS.LOGOUT,
+    method: 'POST'
+  })
+}

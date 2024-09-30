@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { getTime } from '@/utils/time'
 // 消息提示窗
 import { ElNotification } from 'element-plus'
@@ -54,7 +54,7 @@ import { UserFilled, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 const loginForm = reactive({
   username: 'admin',
-  password: 'admin12'
+  password: '111111'
 })
 
 //  定义登录表单校验规则
@@ -63,7 +63,7 @@ const loginRules = reactive({
     { required: true, min: 3, max: 10, message: '长度不得小于3位，不得超出10位', trigger: 'blur' }
   ],
   password: [
-    { required: true, min: 8, max: 12, message: '长度不得小于8位，不得超出12位', trigger: 'blur' }
+    { required: true, min: 3, max: 12, message: '长度不得小于3位，不得超出12位', trigger: 'blur' }
   ]
 })
 // const validatorUserName = (rule:any, value: any, callback: any) => {
@@ -101,6 +101,8 @@ const loginRules = reactive({
 // }
 // 获取路由器
 const $router = useRouter()
+const $route = useRoute()
+
 let loading = ref(false)
 let loginRef = ref()
 const handleLogin = async () => {
@@ -119,8 +121,9 @@ const handleLogin = async () => {
     await useStore.userLogin(loginForm)
     // 加载效果消失
     loading.value = false
-    // 跳转首页
-    await $router.push('/menu')
+    // 获取有没有redirect参数,没有跳转首页
+    const redirect: any = $route.query.redirect || '/home'
+    await $router.push(redirect)
     // 弹出成功信息
     ElNotification({
       type: 'success',
