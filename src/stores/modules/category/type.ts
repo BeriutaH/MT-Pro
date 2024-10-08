@@ -2,16 +2,19 @@ export interface CategoryObj {
   id: number
   name: string
 }
+// 属性值对象
 export interface AttrValueObj {
-  id: number
+  id?: number
   valueName: string
-  attrId: number
+  attrId?: number
+  flag?:boolean
 }
 
+// 属性对象
 export interface AttrObj {
-  id: number
+  id?: number
   attrName: string
-  categoryId: number
+  categoryId: number | string
   categoryLevel: number
   attrValueList: AttrValueObj[]
 }

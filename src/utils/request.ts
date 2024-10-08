@@ -49,7 +49,7 @@ request.interceptors.response.use(
 const requestWrapper = <T = any>(config: AxiosRequestConfig): Promise<T> => {
   const userStore = useUserStore()
   const token = userStore.token
-  console.log('token', token)
+  // console.log('token', token)
   if (token) {
     config.headers = {
       ...config.headers,

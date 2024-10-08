@@ -1,7 +1,7 @@
 // 属性相关API请求接口
 import requestWrapper from '@/utils/request'
 import type { ApiResponse } from '@/api/user/type'
-import type { ID } from '@/stores/modules/category/type'
+import type { AttrObj, ID } from '@/stores/modules/category/type'
 import ApiSetting from '@/api'
 
 // 获取一级属性
@@ -30,5 +30,14 @@ export const reqAttrInfoList = (id1: ID, id2: ID, id3: ID): Promise<ApiResponse>
   return requestWrapper<ApiResponse>({
     url: `${ApiSetting.AttrBaseURL}/${id1}/${id2}/${id3}`,
     method: 'GET'
+  })
+}
+
+// 新增或修改已有属性
+export const addOrUpdateAttr = (attrData:AttrObj): Promise<ApiResponse> => {
+  return requestWrapper<ApiResponse>({
+    url: ApiSetting.PropertyAddPreEditURL,
+    method: 'POST',
+    data:attrData
   })
 }

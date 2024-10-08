@@ -1,6 +1,6 @@
 <template>
   <el-card>
-    <el-form :inline="true" class="category_form">
+    <el-form :inline="true" class="category_form" :disabled="!scene">
       <el-form-item label="一级分类">
         <el-select v-model="categoryStore.p1Id" @change="handlerP2">
           <!--
@@ -43,6 +43,8 @@
 import useCategoryStore from '@/stores/modules/category/category'
 // 引入生命周期函数，组件一加载就去请求数据
 import { onMounted } from 'vue'
+// 接收父组件传递过来的scene
+const props = defineProps(['scene'])
 
 const categoryStore = useCategoryStore()
 onMounted(() => {

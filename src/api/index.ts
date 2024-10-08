@@ -11,6 +11,8 @@ export default {
   UploadURL: ProductBaseURL + '/fileUpload',
   // 属性
   PropertyBaseURL: ProductBaseURL + '/getCategory',
+  // 增加或修改属性
+  PropertyAddPreEditURL: ProductBaseURL + '/saveAttrInfo',
   // 商品基础属性
   AttrBaseURL: ProductBaseURL + '/attrInfoList'
 }
