@@ -38,7 +38,7 @@ import DynamicMenu from '@/components/menu/index.vue'
 import Main from '@/components/main/index.vue'
 import TopNavigation from '@/components/top_navigation/index.vue'
 // 获取小仓库存储的数据
-import useUserStore from '@/stores/modules/user'
+import useUserStore from '@/stores/modules/users/user'
 import useSettingStore from '@/stores/modules/setting'
 const useStore = useUserStore()
 const settingStore = useSettingStore()

@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router'
 import useSettingStore from '@/stores/modules/setting'
-import useUserStore from '@/stores/modules/user'
+import useUserStore from '@/stores/modules/users/user'
 const settingStore = useSettingStore()
 const userStore = useUserStore()
 // 获取路由对象

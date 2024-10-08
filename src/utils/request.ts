@@ -1,7 +1,7 @@
 // 对axios的二次封装: 使用请求与响应的拦截器等
 import axios from 'axios'
 import type { AxiosRequestConfig } from 'axios'
-import useUserStore from '@/stores/modules/user'
+import useUserStore from '@/stores/modules/users/user'
 
 // 基础配置
 const request = axios.create({

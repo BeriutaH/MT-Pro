@@ -11,6 +11,42 @@
 
 ::-webkit-scrollbar-thumb {
   width: 10px;
-  background-color: $pink-color;
+  background-color: $pink-color !important;
   border-radius: 10px;
+}
+
+// 添加按钮的样式
+.custom_button {
+  background-color: $medium-color !important;
+  color: white;
+  border: 2px solid $medium-color !important; // 使用 SCSS 变量
+
+  &:hover {
+    background-color: $light-green-color !important; // 可选：鼠标悬停时稍微变暗
+    border: 2px solid $light-green-color !important; // 使用 SCSS 变量
+  }
+}
+
+/* 修改按钮样式 */
+.edit_btn {
+  background-color: $edit-color !important; /* 淡黄色 */
+  border-color: $edit-color !important;
+  color: white; /* 字体颜色 */
+}
+
+.edit_btn:hover {
+  background-color: $edit-light-color !important; /* 鼠标悬停时颜色稍微浅一点 */
+  border-color: $edit-light-color !important;
+}
+
+/* 删除按钮样式 */
+.delete_btn {
+  background-color: $delete-color !important;
+  border-color: $delete-color !important;
+  color: white;
+}
+
+.delete_btn:hover {
+  background-color: $delete-light-color !important;
+  border-color: $delete-light-color !important;
 }

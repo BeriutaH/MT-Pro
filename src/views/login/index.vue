@@ -28,7 +28,7 @@
           <el-form-item>
             <el-button
               :loading="loading"
-              class="login_btn"
+              class="login_btn custom_button"
               type="primary"
               size="default"
               @click="handleLogin"
@@ -47,7 +47,7 @@ import { getTime } from '@/utils/time'
 // 消息提示窗
 import { ElNotification } from 'element-plus'
 // 引入用户相关的小仓库
-import useUserStore from '@/stores/modules/user'
+import useUserStore from '@/stores/modules/users/user'
 const useStore = useUserStore()
 console.log('小仓库', useStore)
 import { UserFilled, Lock } from '@element-plus/icons-vue'

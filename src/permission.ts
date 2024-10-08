@@ -15,7 +15,7 @@ import 'nprogress/nprogress.css'
 nprogress.configure({ showSpinner: false })
 // 引入大仓库跟小仓库的用户相关数据
 import pinia from '@/stores'
-import useUserStore from '@/stores/modules/user'
+import useUserStore from '@/stores/modules/users/user'
 const userStore = useUserStore(pinia)
 const username = userStore.username
 

@@ -2,7 +2,7 @@
   <div>
     <el-card>
       <!-- 卡片上方的按钮 -->
-      <!--    <el-button style="background-color: #f4b8e4; color: white;border: 2px solid #f4b8e4" type="primary" size="default" icon="Plus">添加品牌</el-button>-->
+      <!--    <el-button style="background-color: #f4b8e4; color: white;border: 2px solid #f4b8e4" types="primary" size="default" icon="Plus">添加品牌</el-button>-->
       <el-button
         class="custom_button"
         type="primary"
@@ -31,10 +31,20 @@
         </el-table-column>
         <el-table-column label="品牌操作" align="center">
           <template v-slot="{ row }">
-            <el-button class="edit_btn" type="primary" size="small" icon="Edit" @click="updateTrademark(row)"
+            <el-button
+              class="edit_btn"
+              type="primary"
+              size="small"
+              icon="Edit"
+              @click="updateTrademark(row)"
               >修改</el-button
             >
-            <el-button class="delete_btn" type="primary" size="small" icon="Delete" @click="removeTrademark(row.id)"
+            <el-button
+              class="delete_btn"
+              type="primary"
+              size="small"
+              icon="Delete"
+              @click="removeTrademark(row.id)"
               >删除</el-button
             >
           </template>
@@ -280,45 +290,11 @@ const certain = async () => {
 }
 </script>
 
-<style scoped lang="scss">
-.custom_button {
-  background-color: $medium-color;
-  color: white;
-  border: 2px solid $medium-color; // 使用 SCSS 变量
-
-  &:hover {
-    background-color: $light-green-color; // 可选：鼠标悬停时稍微变暗
-    border: 2px solid $light-green-color; // 使用 SCSS 变量
-  }
-}
+<style lang="scss">
 .avatar-uploader .avatar {
   width: 178px;
   height: 178px;
   display: block;
-}
-
-/* 修改按钮样式 */
-.edit_btn {
-  background-color: $edit-color; /* 淡黄色 */
-  border-color: $edit-color;
-  color: white; /* 字体颜色 */
-}
-
-.edit_btn:hover {
-  background-color: $edit-light-color; /* 鼠标悬停时颜色稍微浅一点 */
-  border-color: $edit-light-color;
-}
-
-/* 删除按钮样式 */
-.delete_btn {
-  background-color: $delete-color;
-  border-color: $delete-color;
-  color: white;
-}
-
-.delete_btn:hover {
-  background-color: $delete-light-color;
-  border-color: $delete-light-color;
 }
 </style>
 
@@ -335,7 +311,4 @@ const certain = async () => {
 .avatar-uploader .el-upload:hover {
   border-color: #00999f;
 }
-
-
-
 </style>

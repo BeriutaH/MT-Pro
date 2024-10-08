@@ -6,7 +6,7 @@
 // 引入组合式API函数之生命周期函数
 import { onMounted } from 'vue'
 // 获取仓库
-import useUserStore from '@/stores/modules/user'
+import useUserStore from '@/stores/modules/users/user'
 const userStore = useUserStore()
 // 首页挂载完毕发送请求获取用户信息
 onMounted(() => {
