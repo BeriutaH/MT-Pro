@@ -48,22 +48,6 @@ const useCategoryStore = defineStore('Category', {
         return Promise.reject(new Error(result.message))
       }
     },
-    async clearStore() {
-      // 清空仓库的数据
-      // const propertiesToClear: (keyof CategoryState)[] = ['p1Arr', 'p2Arr', 'p3Arr', 'p1Id', 'p2Id', 'p3Id', 'attrInfo'];
-      //
-      // propertiesToClear.forEach(prop => {
-      //   this.CategoryState[prop] = Array.isArray(this.CategoryState[prop]) ? [] : '';
-      // })
-      this.p1Arr = []
-      this.p2Arr = []
-      this.p3Arr = []
-      this.p1Id = ''
-      this.p3Id = ''
-      this.p2Id = ''
-      this.attrInfo = []
-    }
-
   },
   getters: {}
 })

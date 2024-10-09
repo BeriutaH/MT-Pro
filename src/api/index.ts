@@ -13,6 +13,8 @@ export default {
   PropertyBaseURL: ProductBaseURL + '/getCategory',
   // 增加或修改属性
   PropertyAddPreEditURL: ProductBaseURL + '/saveAttrInfo',
+  // 删除
+  PropertyDelURL: ProductBaseURL + '/deleteAttr',
   // 商品基础属性
   AttrBaseURL: ProductBaseURL + '/attrInfoList'
 }

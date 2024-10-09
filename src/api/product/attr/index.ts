@@ -41,3 +41,11 @@ export const addOrUpdateAttr = (attrData:AttrObj): Promise<ApiResponse> => {
     data:attrData
   })
 }
+
+// 删除属性
+export const delAttr = (attrId:number|string): Promise<ApiResponse> => {
+  return requestWrapper<ApiResponse>({
+    url: `${ApiSetting.PropertyDelURL}/${attrId}`,
+    method: 'DELETE'
+  })
+}

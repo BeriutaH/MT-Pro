@@ -44,12 +44,12 @@ import useCategoryStore from '@/stores/modules/category/category'
 // 引入生命周期函数，组件一加载就去请求数据
 import { onMounted } from 'vue'
 // 接收父组件传递过来的scene
-const props = defineProps(['scene'])
+defineProps(['scene'])
 
 const categoryStore = useCategoryStore()
 onMounted(() => {
-  // 组件一开始加载时，先清空小仓库的数据
-  categoryStore.clearStore()
+  // 组件一开始加载时，先清空小仓库的数据, 内置方法$reset
+  categoryStore.$reset()
   // 获取一级分类数据
   categoryStore.getP1()
 })
