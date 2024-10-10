@@ -47,7 +47,7 @@ const useCategoryStore = defineStore('Category', {
       } else {
         return Promise.reject(new Error(result.message))
       }
-    },
+    }
   },
   getters: {}
 })

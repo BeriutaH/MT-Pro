@@ -7,7 +7,7 @@ export interface AttrValueObj {
   id?: number
   valueName: string
   attrId?: number
-  flag?:boolean
+  flag?: boolean
 }
 
 // 属性对象

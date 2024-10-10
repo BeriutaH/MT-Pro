@@ -1,6 +1,7 @@
 <template>
   <el-card>
-    <el-form :inline="true" class="category_form" :disabled="!scene">
+
+    <el-form :inline="true" class="category_form" :disabled="scene != 1">
       <el-form-item label="一级分类">
         <el-select v-model="categoryStore.p1Id" @change="handlerP2">
           <!--
@@ -35,6 +36,9 @@
           ></el-option>
         </el-select>
       </el-form-item>
+      <div>
+        <p>scene: {{ scene }}</p>
+      </div>
     </el-form>
   </el-card>
 </template>

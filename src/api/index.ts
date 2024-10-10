@@ -9,12 +9,16 @@ export default {
   TrademarkBaseURL: ProductBaseURL + '/baseTrademark/',
   // 文件
   UploadURL: ProductBaseURL + '/fileUpload',
+
   // 属性
   PropertyBaseURL: ProductBaseURL + '/getCategory',
   // 增加或修改属性
   PropertyAddPreEditURL: ProductBaseURL + '/saveAttrInfo',
-  // 删除
+  // 属性删除
   PropertyDelURL: ProductBaseURL + '/deleteAttr',
   // 商品基础属性
-  AttrBaseURL: ProductBaseURL + '/attrInfoList'
+  AttrBaseURL: ProductBaseURL + '/attrInfoList',
+
+  // SPU
+  SPUBaseUrl: ProductBaseURL + '/'
 }

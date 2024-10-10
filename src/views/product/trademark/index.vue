@@ -102,19 +102,15 @@
           >
             <img v-if="trademarkParams.logoUrl" :src="trademarkParams.logoUrl" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
-            <div
-              v-if="!trademarkParams.logoUrl"
-              class="upload-tips"
-              style="margin-top: 5px; color: #999; font-size: 10px"
-            >
-              只允许JPG，JPEG，GIF图片类型 大小不超过4MB
+            <div v-if="!trademarkParams.logoUrl" class="upload-tips image_setting">
+              只允许JPG，JPEG，GIF图片类型，大小不超过4MB
             </div>
           </el-upload>
         </el-form-item>
       </el-form>
       <!-- 具名插槽:footer -->
       <template #footer>
-        <el-button type="primary" size="small" @click="cancel">取消</el-button>
+        <el-button class="cancel_btn" type="primary" size="small" @click="cancel">取消</el-button>
         <el-button type="primary" size="small" @click="certain">确定</el-button>
       </template>
     </el-dialog>
@@ -307,8 +303,15 @@ const certain = async () => {
   overflow: hidden;
   transition: var(--el-transition-duration-fast);
 }
-
-.avatar-uploader .el-upload:hover {
-  border-color: #00999f;
+.image_setting {
+  margin-top: 5px;
+  color: #999;
+  font-size: 10px;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 </style>

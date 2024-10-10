@@ -34,16 +34,16 @@ export const reqAttrInfoList = (id1: ID, id2: ID, id3: ID): Promise<ApiResponse>
 }
 
 // 新增或修改已有属性
-export const addOrUpdateAttr = (attrData:AttrObj): Promise<ApiResponse> => {
+export const addOrUpdateAttr = (attrData: AttrObj): Promise<ApiResponse> => {
   return requestWrapper<ApiResponse>({
     url: ApiSetting.PropertyAddPreEditURL,
     method: 'POST',
-    data:attrData
+    data: attrData
   })
 }
 
 // 删除属性
-export const delAttr = (attrId:number|string): Promise<ApiResponse> => {
+export const delAttr = (attrId: number | string): Promise<ApiResponse> => {
   return requestWrapper<ApiResponse>({
     url: `${ApiSetting.PropertyDelURL}/${attrId}`,
     method: 'DELETE'

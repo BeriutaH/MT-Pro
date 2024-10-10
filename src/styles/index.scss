@@ -50,3 +50,20 @@
   background-color: $delete-light-color !important;
   border-color: $delete-light-color !important;
 }
+
+/* 取消按钮样式 */
+.cancel_btn {
+  background-color: $cancel-color !important;
+  border-color: $cancel-color !important;
+  color: white;
+}
+
+.cancel_btn:hover {
+  background-color: $cancel-light-color !important;
+  border-color: $cancel-light-color !important;
+}
+
+/* 图片框框 */
+.avatar-uploader .el-upload:hover {
+  border-color: $medium-color !important;
+}
