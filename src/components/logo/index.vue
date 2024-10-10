@@ -14,7 +14,6 @@ const settingStore = useSettingStore()
 <style scoped lang="scss">
 .logo {
   width: 100%;
-  height: $base-logo-height;
   color: white;
   display: flex;
   align-items: center;
