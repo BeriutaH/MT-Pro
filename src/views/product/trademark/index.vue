@@ -152,6 +152,7 @@ const dialogFormVisibleOperate = () => {
 // 文件数据的暂存
 const fileToUpload = ref<UploadRawFile | null>(null) // 初始化为 null
 const apiUrl = import.meta.env.VITE_SERVE
+
 // 上传图片之前的钩子函数
 const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
   // 规定只允许JPG，JPEG，GIF图片类型
@@ -173,6 +174,7 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
   }
   return false
 }
+
 // 上传图片之后，返回的文件数据
 const handleAvatarSuccess: UploadProps['onSuccess'] = (response, uploadFile) => {
   trademarkParams.logoUrl = URL.createObjectURL(uploadFile.raw!)

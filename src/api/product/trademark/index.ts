@@ -6,11 +6,13 @@ import type { Trademark } from '@/api/product/trademark/type'
 // 品牌管理模块接口地址
 enum API {
   // 添加品牌
-  ADD_TRADEMARK_URL = 'save',
+  ADD_TRADEMARK_URL = '/save',
   // 修改品牌
-  UPDATE_TRADEMARK_URL = 'update',
+  UPDATE_TRADEMARK_URL = '/update',
   // 删除品牌
-  REMOVE_TRADEMARK_URL = 'remove'
+  REMOVE_TRADEMARK_URL = '/remove',
+  // 获取品牌列表
+  LIST_TRADEMARK_URL = '/getTrademarkList'
 }
 
 /*
@@ -58,5 +60,13 @@ export const reqUpload = (data: any): Promise<ApiResponse> => {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
+  })
+}
+
+// 获取品牌种类
+export const reqTrademarkList = (): Promise<ApiResponse> => {
+  return requestWrapper<ApiResponse>({
+    url: `${ApiSetting.TrademarkBaseURL}${API.LIST_TRADEMARK_URL}`,
+    method: 'GET'
   })
 }

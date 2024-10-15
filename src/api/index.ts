@@ -6,10 +6,11 @@ export default {
   // 用户相关请求
   UserBaseURL: BaseURL + '/acl/index',
   // 品牌
-  TrademarkBaseURL: ProductBaseURL + '/baseTrademark/',
+  TrademarkBaseURL: ProductBaseURL + '/baseTrademark',
   // 文件
   UploadURL: ProductBaseURL + '/fileUpload',
 
+  /***********************************商品属性****************************************/
   // 属性
   PropertyBaseURL: ProductBaseURL + '/getCategory',
   // 增加或修改属性
@@ -19,6 +20,17 @@ export default {
   // 商品基础属性
   AttrBaseURL: ProductBaseURL + '/attrInfoList',
 
-  // SPU
-  SPUBaseUrl: ProductBaseURL + '/'
+  /**************************************SPU*************************************/
+  // 获取SPU信息
+  SPUBaseUrl: ProductBaseURL + '/',
+  // 获取SPU图片信息
+  SPUImageUrl: ProductBaseURL + '/spuImageList',
+  // 获取SPU销售属性列表
+  SPUSaleUrl: ProductBaseURL + '/spuSaleAttrList',
+  // 获取整个项目的SPU销售属性【颜色，版本，尺码】
+  SPUAllSaleUrl: ProductBaseURL + '/baseSaleAttrList',
+  // 添加SPU
+  SPUAddUrl: ProductBaseURL + '/saveSpuInfo',
+  // 修改SPU
+  SPUEditUrl: ProductBaseURL + '/updateSpuInfo'
 }
