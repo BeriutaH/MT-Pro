@@ -36,7 +36,7 @@
                   <el-button class="delete_btn" type="primary" size="small" icon="Delete"></el-button>
                 </template>
               </el-popconfirm>
-              <el-button class="custom_button" type="primary" size="small" icon="Plus"
+              <el-button class="custom_button" type="primary" size="small" icon="Plus" @click="addSku(row)"
                 >添加SKU</el-button
               >
               <el-button type="primary" size="small" icon="View"> 查看SKU </el-button>
@@ -57,7 +57,7 @@
       </div>
       <!-- 子组件暴露方法给父组件 ref，父组件触发 -->
       <SPUForm ref="spu" v-show="scene == 2" @changeScene="changeScene" />
-      <SKUForm v-show="scene == 0" />
+      <SKUForm ref="sku" v-show="scene == 0" @changeScene="changeScene" />
     </el-card>
   </div>
 </template>
@@ -71,7 +71,6 @@ import SPUForm from '@/views/product/spu/SPUForm.vue'
 import type { SpuObj } from '@/api/product/spu/type'
 import type { Trademark } from '@/api/product/trademark/type'
 import type { Sale, SaleAttr } from '@/api/product/spu/type'
-
 const scene = ref(1) // 1:显示SPU，2：添加或修改SPU，0：添加SKU
 // 当前页码
 const pageNo = ref(1)
@@ -84,6 +83,7 @@ const spuArr = ref<SpuObj[]>([])
 const categoryStore = useCategoryStore()
 
 const spu = ref()
+const sku = ref()
 
 // 获取SPU信息
 const getSPU = async () => {
@@ -102,6 +102,11 @@ const addSPU = async () => {
   await spu.value.initSpuAdd(categoryStore.p3Id)
 }
 
+// 删除SPU
+const delAttrInfo = (id:number|string) => {
+  console.log(id)
+}
+
 // 子组件SPUForm绑定自定义事件：目前是让子组件通知父组件对应的数据切换场景
 const changeScene = (num: number, page=0) => {
   scene.value = num
@@ -114,7 +119,19 @@ const changeScene = (num: number, page=0) => {
   }
 }
 
-
+// 添加SKU
+const addSku = async (row:SpuObj) => {
+  changeScene(0)
+  // 组建传递到子组件的格式
+  const SpuInfo = {
+    spuObj:row,
+    p1Id:categoryStore.p1Id,
+    p2Id:categoryStore.p2Id,
+    p3Id:categoryStore.p3Id,
+  }
+  // 调用子组件的功能
+  await sku.value.initSkuAdd(SpuInfo)
+}
 
 // 获取品牌数据
 const updateSpu = async (row: SpuObj) => {

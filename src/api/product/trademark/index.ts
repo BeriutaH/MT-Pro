@@ -22,7 +22,7 @@ enum API {
  */
 export const reqHasTrademark = (page: number, limit: number): Promise<ApiResponse> => {
   return requestWrapper<ApiResponse>({
-    url: `${ApiSetting.TrademarkBaseURL}${page}/${limit}`,
+    url: `${ApiSetting.TrademarkBaseURL}/${page}/${limit}`,
     method: 'GET'
   })
 }

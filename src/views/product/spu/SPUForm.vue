@@ -199,6 +199,10 @@ const initSpuHas = async (spu: SpuObj) => {
   console.log(SpuParams)
 }
 
+//
+const handleRemove = () => {
+  console.log('handleRemove')
+}
 const initSpuAdd = async (p3Id:number|string) => {
   // 清空数据
   Object.assign(SpuParams.value,{
