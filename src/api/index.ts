@@ -32,5 +32,12 @@ export default {
   // 添加SPU
   SPUAddUrl: ProductBaseURL + '/saveSpuInfo',
   // 修改SPU
-  SPUEditUrl: ProductBaseURL + '/updateSpuInfo'
+  SPUEditUrl: ProductBaseURL + '/updateSpuInfo',
+  // 删除SPU
+  SPURemoveUrl: ProductBaseURL + '/deleteSpu',
+
+  /**************************************SKU*************************************/
+  // 添加SKU信息
+  SKUAddUrl: ProductBaseURL + '/saveSkuInfo',
+  SKUInfoUrl: ProductBaseURL + '/findBySpuId',
 }
