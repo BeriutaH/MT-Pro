@@ -37,7 +37,12 @@
               <!-- 泡泡按钮 confirm确定时相应的事件  -->
               <el-popconfirm :title="`你确定要删除${row.attrName}`" @confirm="delAttrInfo(row.id)">
                 <template #reference>
-                  <el-button class="delete_btn" type="primary" size="small" icon="Delete"></el-button>
+                  <el-button
+                    class="delete_btn"
+                    type="primary"
+                    size="small"
+                    icon="Delete"
+                  ></el-button>
                 </template>
               </el-popconfirm>
             </template>
@@ -214,7 +219,7 @@ const attrSave = async () => {
   // 添加成功后，将数据清空
   if (result.code == 200) {
     // 判断如果是修改，直接返回，如果是添加，则清除数据
-    if (attrParams.id){
+    if (attrParams.id) {
       changeScene(1)
     } else {
       // 将除了属性id的数据清除

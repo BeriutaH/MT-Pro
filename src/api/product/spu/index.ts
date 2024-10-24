@@ -55,10 +55,10 @@ export const reqAddOrUpdateSPU = (data: SpuObj): Promise<ApiResponse> => {
 }
 
 // 删除SPU
-export const reqDeleteSPU = (spuId:number|string): Promise<ApiResponse> => {
+export const reqDeleteSPU = (spuId: number | string): Promise<ApiResponse> => {
   // 获取三级id
   return requestWrapper<ApiResponse>({
     url: `${ApiSetting.SPURemoveUrl}/${spuId}`,
-    method: 'DELETE',
+    method: 'DELETE'
   })
 }

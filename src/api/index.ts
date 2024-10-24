@@ -40,4 +40,8 @@ export default {
   // 添加SKU信息
   SKUAddUrl: ProductBaseURL + '/saveSkuInfo',
   SKUInfoUrl: ProductBaseURL + '/findBySpuId',
+  SKUAllInfoUrl: ProductBaseURL + '/list',
+  SKUUpUrl: ProductBaseURL + '/onSale',
+  SKUDownUrl: ProductBaseURL + '/cancelSale',
+  SKUDataUrl: ProductBaseURL + '/getSkuById',
 }

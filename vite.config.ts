@@ -6,6 +6,10 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
+const getTargetUrl = () => {
+  console.log("执行URL")
+  return ''; // 默认地址
+}
 export default defineConfig(({mode})=>{
   // 根据 `mode` 加载 .env 文件的配置
   const env = loadEnv(mode, process.cwd())
@@ -34,15 +38,21 @@ export default defineConfig(({mode})=>{
         }
       }
     },
-    server: {
-      proxy: {
-        [env.VITE_APP_BASE_API]: {
-          target: env.VITE_SERVE,  // 目标 API 服务器的地址
-          changeOrigin: true,  // 允许跨域
-          rewrite: (path) => path.replace(/^\/api/, ''),  // 重写请求路径，把 `/api` 移除
-        }
-      }
-    }
+    // server: {
+    //   proxy: {
+    //     // 直接使用你自己指定的 IP 地址
+    //     '/custom_api': {
+    //       target: env.VITE_SERVE_TWO,  // 自定义的 IP 地址
+    //       changeOrigin: true,
+    //       rewrite: (path) => path.replace(/^\/custom-api/, ''),  // 重写路径移除 /custom-api
+    //     },
+    //     [env.VITE_APP_BASE_API]: {
+    //       target: env.VITE_SERVE,  // 目标 API 服务器的地址
+    //       changeOrigin: true,  // 允许跨域
+    //       rewrite: (path) => path.replace(/^\/api/, ''),  // 重写请求路径，把 `/api` 移除
+    //     }
+    //   }
+    // }
   }
 })
 

@@ -46,8 +46,19 @@
       <el-form-item label="SPU销售属性">
         <div style="display: inline-flex">
           <!-- 展示销售属性的下拉菜单 -->
-          <el-select class="select_spu" v-model="saleAttrIdAndName" :placeholder="unSelectSaleAttr.length == 0?'':`还有${unSelectSaleAttr.length}个未选择`">
-            <el-option  :value="`${item.id}:${item.name}`" v-for="(item, $index) in unSelectSaleAttr" :label="item.name" :key="item.id"></el-option>
+          <el-select
+            class="select_spu"
+            v-model="saleAttrIdAndName"
+            :placeholder="
+              unSelectSaleAttr.length == 0 ? '' : `还有${unSelectSaleAttr.length}个未选择`
+            "
+          >
+            <el-option
+              :value="`${item.id}:${item.name}`"
+              v-for="(item, $index) in unSelectSaleAttr"
+              :label="item.name"
+              :key="item.id"
+            ></el-option>
           </el-select>
           <el-button
             :disabled="!saleAttrIdAndName"
@@ -65,11 +76,23 @@
           <el-table-column label="序号" type="index" align="center" width="80px"></el-table-column>
           <el-table-column label="销售属性名字" width="180px" prop="saleAttrName"></el-table-column>
           <el-table-column label="销售属性值">
-            <template #="{row, $index}">
-              <el-tag closable @close="row.spuSaleAttrValueList.splice(index, 1)" style="margin: 0px 10px" v-for="(item, index) in row.spuSaleAttrValueList" :key="item.id">
+            <template #="{ row, $index }">
+              <el-tag
+                closable
+                @close="row.spuSaleAttrValueList.splice(index, 1)"
+                style="margin: 0px 10px"
+                v-for="(item, index) in row.spuSaleAttrValueList"
+                :key="item.id"
+              >
                 {{ item.saleAttrValueName }}
               </el-tag>
-              <el-input @blur="toLook(row)" v-if="row.flag" v-model="row.saleAttrValueName" size="small" style="width: 100px"></el-input>
+              <el-input
+                @blur="toLook(row)"
+                v-if="row.flag"
+                v-model="row.saleAttrValueName"
+                size="small"
+                style="width: 100px"
+              ></el-input>
               <el-button
                 v-else
                 class="custom_button"
@@ -83,15 +106,28 @@
             </template>
           </el-table-column>
           <el-table-column label="操作" width="180px">
-            <template #="{row, $index}">
-              <el-button class="delete_btn" type="primary" size="small" icon="Delete" @click="saleList.splice($index, 1)"></el-button>
+            <template #="{ row, $index }">
+              <el-button
+                class="delete_btn"
+                type="primary"
+                size="small"
+                icon="Delete"
+                @click="saleList.splice($index, 1)"
+              ></el-button>
             </template>
           </el-table-column>
         </el-table>
       </el-form-item>
       <div style="display: flex; justify-content: flex-end">
         <el-button class="cancel_btn" type="primary" size="default" @click="cancel">返回</el-button>
-        <el-button :disabled="saleList.length<=0" class="custom_button" type="primary" size="default" @click="save">确认</el-button>
+        <el-button
+          :disabled="saleList.length <= 0"
+          class="custom_button"
+          type="primary"
+          size="default"
+          @click="save"
+          >确认</el-button
+        >
       </div>
     </el-form>
   </div>
@@ -159,9 +195,9 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
 // 获取信息共用的接口数据
 const getAllInfo = async () => {
   /*
-  * 获取所有的销售数据
-  * 获取所有的品牌数据
-  * */
+   * 获取所有的销售数据
+   * 获取所有的品牌数据
+   * */
   const trademarkResult = await reqTrademarkList()
   if (trademarkResult.code == 200) {
     trademarkList.value = trademarkResult.data
@@ -203,10 +239,10 @@ const initSpuHas = async (spu: SpuObj) => {
 const handleRemove = () => {
   console.log('handleRemove')
 }
-const initSpuAdd = async (p3Id:number|string) => {
+const initSpuAdd = async (p3Id: number | string) => {
   // 清空数据
-  Object.assign(SpuParams.value,{
-    id:'',
+  Object.assign(SpuParams.value, {
+    id: '',
     category3Id: '',
     description: '',
     spuName: '',
@@ -232,49 +268,49 @@ const handlePictureCardPreview = (file: any) => {
 // 计算出当前SPU还未拥有的销售属性
 const unSelectSaleAttr = computed(() => {
   // 返回未选择的属性
-  return saleAllList.value.filter(item => {
+  return saleAllList.value.filter((item) => {
     // every 方法遍历 saleList.value 过滤出 saleList 中不包含的属性
-    return saleList.value.every(item1 => {
+    return saleList.value.every((item1) => {
       // 如果当前 item1.saleAttrName 在 saleAllList 中不存在，则返回 true
       return item.name != item1.saleAttrName
     })
   })
 })
 
-
-
 // 添加销售属性
 const addSaleAttr = () => {
   const [baseSaleAttrId, saleAttrName] = saleAttrIdAndName.value.split(':')
-  let newSaleAttr:SaleAttr = {
+  let newSaleAttr: SaleAttr = {
     baseSaleAttrId,
     saleAttrName,
-    spuSaleAttrValueList:[]
+    spuSaleAttrValueList: []
   }
   // 追加到数组当中
   saleList.value.push(newSaleAttr)
   console.log('saleList', saleList)
   // 清空收集的数据
   saleAttrIdAndName.value = ''
-
 }
 
 // 添加销售属性
-const saleAdd = (sale:SaleAttr) => {
+const saleAdd = (sale: SaleAttr) => {
   sale.flag = true
 }
 
 // 失去焦点触发
-const toLook = (row:any) => {
+const toLook = (row: any) => {
   // row.saleAttrValueName 不能为空，也不能重复
-  if (!row.saleAttrValueName.trim() || row.spuSaleAttrValueList.some(item => item.saleAttrValueName === row.saleAttrValueName)) {
+  if (
+    !row.saleAttrValueName.trim() ||
+    row.spuSaleAttrValueList.some((item) => item.saleAttrValueName === row.saleAttrValueName)
+  ) {
     row.saleAttrValueName = ''
     return ElMessage.error('销售属性值不能为空或重名')
   }
   console.log(row)
   // 整理成服务器需要的属性值形式, v-model收集的值放在了saleAttrValueName字段里了
   const newSaleAttrValue: SaleAttrValue = {
-    baseSaleAttrId:row.baseSaleAttrId,
+    baseSaleAttrId: row.baseSaleAttrId,
     saleAttrValueName: row.saleAttrValueName
   }
   // 追加新的属性值对象
@@ -287,13 +323,13 @@ const toLook = (row:any) => {
 // 确认按钮的回调函数
 const save = async () => {
   /*
-  * 整理SpuParams参数
-  * 1.照片墙的数据
-  * 2.发送请求，添加SPU或修改SPU
-  * 返回结果校验
-  * */
+   * 整理SpuParams参数
+   * 1.照片墙的数据
+   * 2.发送请求，添加SPU或修改SPU
+   * 返回结果校验
+   * */
   console.log(spuImageList)
-  SpuParams.value.spuImageList = spuImageList.value.map((item:any)=>{
+  SpuParams.value.spuImageList = spuImageList.value.map((item: any) => {
     return {
       imgName: item.name,
       imgUrl: (item.response && item.response.data) || item.url
@@ -303,11 +339,11 @@ const save = async () => {
   SpuParams.value.spuSaleAttrList = saleList.value
   const result = await reqAddOrUpdateSPU(SpuParams.value)
   if (result.code == 200) {
-    ElMessage.success(SpuParams.value.id?'编辑成功':'添加成功')
+    ElMessage.success(SpuParams.value.id ? '编辑成功' : '添加成功')
     // 切换场景,编辑就在当前页，添加就回到第一个
-    $emit('changeScene', 1, SpuParams.value.id?1:0)
+    $emit('changeScene', 1, SpuParams.value.id ? 1 : 0)
   } else {
-    ElMessage.error(SpuParams.value.id?'编辑失败':'添加失败')
+    ElMessage.error(SpuParams.value.id ? '编辑失败' : '添加失败')
   }
 }
 

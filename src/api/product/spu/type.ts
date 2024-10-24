@@ -3,11 +3,11 @@ export interface SaleAttr {
   id?: number
   createTime?: any
   updateTime?: any
-  spuId?: number|string
+  spuId?: number | string
   baseSaleAttrId: number | string
   saleAttrName: string
   spuSaleAttrValueList: SaleAttrValue[]
-  flag?: boolean  // 标记
+  flag?: boolean // 标记
 }
 
 // 已有的销售属性值对象ts类型
@@ -16,7 +16,7 @@ export interface SaleAttrValue {
   createTime?: any
   updateTime?: any
   spuId?: number
-  baseSaleAttrId: number |string
+  baseSaleAttrId: number | string
   saleAttrValueName: string
   saleAttrName?: string
   isChecked?: any

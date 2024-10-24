@@ -21,5 +21,3 @@ export interface SkuSaleAttrValueList {
   saleAttrId: number | string
   saleAttrValueId: number | string
 }
-
-

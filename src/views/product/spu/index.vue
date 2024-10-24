@@ -8,8 +8,7 @@
       <!-- v-if 或 v-show 都可以实现显示与隐藏 -->
       <div v-show="scene == 1">
         <el-button class="custom_button" type="primary" size="default" icon="Plus" @click="addSPU"
-          >添加SPU</el-button
-        >
+          >添加SPU</el-button>
 
         <!-- 表格 -->
         <el-table style="margin: 10px 0" :data="spuArr">
@@ -33,12 +32,25 @@
               <!-- 泡泡按钮 confirm确定时相应的事件  -->
               <el-popconfirm :title="`你确定要删除${row.spuName}`" @confirm="delAttrInfo(row.id)">
                 <template #reference>
-                  <el-button class="delete_btn" type="primary" size="small" icon="Delete"></el-button>
+                  <el-button
+                    class="delete_btn"
+                    type="primary"
+                    size="small"
+                    icon="Delete"
+                  ></el-button>
                 </template>
               </el-popconfirm>
-              <el-button class="custom_button" type="primary" size="small" icon="Plus" @click="addSku(row)"
-                >添加SKU</el-button>
-              <el-button type="primary" size="small" icon="View" @click="findSku(row)"> 查看SKU </el-button>
+              <el-button
+                class="custom_button"
+                type="primary"
+                size="small"
+                icon="Plus"
+                @click="addSku(row)"
+                >添加SKU</el-button
+              >
+              <el-button type="primary" size="small" icon="View" @click="findSku(row)">
+                查看SKU
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -64,12 +76,11 @@
           <el-table-column label="sku价格" prop="price"></el-table-column>
           <el-table-column label="sku重量" prop="weight"></el-table-column>
           <el-table-column label="sku图片">
-            <template #="{row, index}">
+            <template #="{ row, index }">
               <el-image class="custom_image" :src="row.skuDefaultImg"></el-image>
             </template>
           </el-table-column>
         </el-table>
-
       </el-dialog>
     </el-card>
   </div>
@@ -82,8 +93,6 @@ import useCategoryStore from '@/stores/modules/category/category'
 import SKUForm from '@/views/product/spu/SKUForm.vue'
 import SPUForm from '@/views/product/spu/SPUForm.vue'
 import type { SpuObj } from '@/api/product/spu/type'
-import type { Trademark } from '@/api/product/trademark/type'
-import type { Sale, SaleAttr } from '@/api/product/spu/type'
 import { reqSKUInfo } from '@/api/product/sku'
 import { ElMessage } from 'element-plus'
 const scene = ref(1) // 1:显示SPU，2：添加或修改SPU，0：添加SKU
@@ -100,7 +109,7 @@ const categoryStore = useCategoryStore()
 const spu = ref()
 const sku = ref()
 const skuList = ref([])
-const show = ref(false)  // 对话框是否显示
+const show = ref(false) // 对话框是否显示
 
 // 获取SPU信息
 const getSPU = async () => {
@@ -120,10 +129,10 @@ const addSPU = async () => {
 }
 
 // 删除SPU
-const delAttrInfo = async (spuId:number|string) => {
+const delAttrInfo = async (spuId: number | string) => {
   const delResult = await reqDeleteSPU(spuId)
   if (delResult.code == 200) {
-    ElMessage.error('删除SPU成功')
+    ElMessage.success('删除SPU成功')
   } else {
     ElMessage.error(delResult.data)
   }
@@ -132,7 +141,7 @@ const delAttrInfo = async (spuId:number|string) => {
 }
 
 // 子组件SPUForm绑定自定义事件：目前是让子组件通知父组件对应的数据切换场景
-const changeScene = (num: number, page=0) => {
+const changeScene = (num: number, page = 0) => {
   scene.value = num
   if (num == 1) {
     // page为0时，则默认第一页，为1，则在当前页
@@ -144,21 +153,21 @@ const changeScene = (num: number, page=0) => {
 }
 
 // 添加SKU
-const addSku = async (row:SpuObj) => {
+const addSku = async (row: SpuObj) => {
   changeScene(0)
   // 组建传递到子组件的格式
   const SpuInfo = {
-    spuObj:row,
-    p1Id:categoryStore.p1Id,
-    p2Id:categoryStore.p2Id,
-    p3Id:categoryStore.p3Id,
+    spuObj: row,
+    p1Id: categoryStore.p1Id,
+    p2Id: categoryStore.p2Id,
+    p3Id: categoryStore.p3Id
   }
   // 调用子组件的功能
   await sku.value.initSkuAdd(SpuInfo)
 }
 
 // 查看sku
-const findSku = async (spu:SpuObj) => {
+const findSku = async (spu: SpuObj) => {
   //   获取SPU ID，发送请求
   const skuListResult = await reqSKUInfo(spu.id)
   if (skuListResult.code == 200) {
