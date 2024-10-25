@@ -41,10 +41,18 @@ export const reqSKUUpOrDown = (isSale:number, skuId:number|string): Promise<ApiR
   })
 }
 
-// 根据sku获取商品详情，这个换请求方式
+// 根据sku获取商品详情
 export const reqSKUData = (skuId: number | string) => {
   return requestWrapper<ApiResponse>({
     url:`${ApiSetting.SKUDataUrl}/${skuId}`,
     method: 'GET'
+  })
+}
+
+// 删除sku
+export const reqSKUDel = (skuId: number | string) => {
+  return requestWrapper<ApiResponse>({
+    url:`${ApiSetting.SKUDelUrl}/${skuId}`,
+    method: 'DELETE'
   })
 }

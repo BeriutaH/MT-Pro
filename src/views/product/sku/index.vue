@@ -49,7 +49,7 @@
               @click="updateSku()"
             ></el-button>
             <!-- 泡泡按钮 confirm确定时相应的事件  -->
-            <el-popconfirm :title="`你确定要删除${row.spuName}`" @confirm="delAttrInfo(row.id)">
+            <el-popconfirm :title="`你确定要删除: ${row.skuName} ?`" @confirm="delSkuInfo(row.id)" width="300px">
               <template #reference>
                 <el-button class="delete_btn" type="primary" size="small" icon="Delete"></el-button>
               </template>
@@ -122,7 +122,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { reqSKUAllInfo, reqSKUData, reqSKUUpOrDown } from '@/api/product/sku'
+import { reqSKUAllInfo, reqSKUData, reqSKUDel, reqSKUUpOrDown } from '@/api/product/sku'
 import { ElMessage } from 'element-plus'
 
 const allSkuList = ref([])
@@ -131,19 +131,6 @@ const limit = ref(10)
 const total = ref()
 const drawer = ref(false)  // 控制抽屉是否出现
 const skuInfo = ref({
-  // "id": '',
-  // "spuId": '',
-  // "price": '',
-  // "skuName": '',
-  // "skuDesc": '',
-  // "weight": '',
-  // "tmId": '',
-  // "category3Id": '',
-  // "skuDefaultImg": '',
-  // "isSale": '',
-  // "skuImageList": [],
-  // "skuAttrValueList": [],
-  // "skuSaleAttrValueList": []
   "id": 12,
   "spuId": 3,
   "price": 9197,
@@ -254,7 +241,6 @@ const getSKU = async () => {
 }
 
 const getSkuById = async (sku:any) => {
-  console.log("获取数据")
   const result = await reqSKUData(sku.id as number)
   if (result.code == 200) {
     skuInfo.value = result.data
@@ -275,6 +261,17 @@ const operateSku = async (sku:any) => {
     await getSKU()
   } else {
     ElMessage.error(`${action}失败`)
+  }
+}
+
+// 删除sku
+const delSkuInfo = async (skuId:number|string) => {
+  const result = await reqSKUDel(skuId)
+  if (result.code === 200) {
+    ElMessage.success(`删除成功`)
+    await getSKU()
+  } else {
+    ElMessage.error(result.data)
   }
 }
 

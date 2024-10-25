@@ -11,7 +11,7 @@
           >添加SPU</el-button>
 
         <!-- 表格 -->
-        <el-table style="margin: 10px 0" :data="spuArr">
+        <el-table style="margin: 10px 0" :data="spuArr" :height="tableHeight">
           <el-table-column label="序号" type="index" align="center" width="80px"></el-table-column>
           <el-table-column label="SPU名称" prop="spuName" width="160px"></el-table-column>
           <el-table-column
@@ -87,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { reqDeleteSPU, reqSPU, reqSPUImage, reqSPUSale, reqSPUSaleAll } from '@/api/product/spu'
 import useCategoryStore from '@/stores/modules/category/category'
 import SKUForm from '@/views/product/spu/SKUForm.vue'
@@ -110,6 +110,12 @@ const spu = ref()
 const sku = ref()
 const skuList = ref([])
 const show = ref(false) // 对话框是否显示
+const paginationHeight = ref(320)
+
+// 计算 tableHeight，动态返回
+const tableHeight = computed(() => {
+  return `calc(100vh - ${paginationHeight.value}px)`
+})
 
 // 获取SPU信息
 const getSPU = async () => {

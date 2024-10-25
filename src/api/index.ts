@@ -44,4 +44,5 @@ export default {
   SKUUpUrl: ProductBaseURL + '/onSale',
   SKUDownUrl: ProductBaseURL + '/cancelSale',
   SKUDataUrl: ProductBaseURL + '/getSkuById',
+  SKUDelUrl: ProductBaseURL + '/deleteSku',
 }

@@ -22,12 +22,16 @@ const useUserStore = defineStore('User', {
       console.log('触发小仓库登录方法', data)
       const result = await reqLogin(data)
       console.log('去请求登录了', result)
+      // const tt = 'eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSCjAK0A0Ndg1S0lFKrShQsjI0NzYwNjE0MzfUUSotTi3yTAGKQZh-ibmpQB2JKbmZeUq1AHTDp65BAAAA.PZra8wLRrlVB1bBjTMLQHKgJgexqwQNRttZbG92pCeVrlb0-ej_BugjCaTjvSr1UEA_EwRBgZlv686HpOqjzSw'
+      // result.code = 200
       // 返回200，存储token
       // 失败401，登录失败错误信息
       if (result.code == 200) {
         this.token = result.data
+        // this.token = tt
         // 本地存储持久化
         localStorage.setItem('TOKEN', result.data)
+        // localStorage.setItem('TOKEN', tt)
         // 保证当前async函数返回一个成功的promise
         return 'ok'
       } else {

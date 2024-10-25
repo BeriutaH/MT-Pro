@@ -19,14 +19,14 @@
         ---width：设置这列宽度
         ---align：设置这一列对齐方式
       -->
-      <el-table style="margin: 10px 0" :data="trademarkArr">
+      <el-table style="margin: 10px 0" :data="trademarkArr" :height="tableHeight">
         <el-table-column label="序号" width="80px" align="center" type="index"></el-table-column>
         <!-- table-column:默认展示数据用的是div，prop=""，可以用插槽 -->
         <el-table-column label="品牌名称" prop="tmName"></el-table-column>
         <el-table-column label="品牌LOGO">
           <!-- 插槽 -->
           <template v-slot="{ row }">
-            <img :src="row.logoUrl" alt="图片无法加载" style="width: 40px; height: 30px" />
+            <img :src="row.logoUrl" alt="图片无法加载"  class="custom_image" />
           </template>
         </el-table-column>
         <el-table-column label="品牌操作" align="center">
@@ -118,7 +118,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, computed } from 'vue'
 import {
   reqDelTrademark,
   reqHasTrademark,
@@ -143,6 +143,12 @@ let dialogFormVisible = ref(false)
 let trademarkParams = reactive<Trademark>({
   tmName: '',
   logoUrl: ''
+})
+const paginationHeight = ref(210)
+
+// 计算 tableHeight，动态返回
+const tableHeight = computed(() => {
+  return `calc(100vh - ${paginationHeight.value}px)`
 })
 
 // 关闭对话框
@@ -267,6 +273,7 @@ const certain = async () => {
     }
     console.log('上传文件', fileResult)
   }
+
   // 关闭对话框
   dialogFormVisibleOperate()
   const result = await reqOperateTrademark(trademarkParams)
