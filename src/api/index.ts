@@ -2,6 +2,8 @@
 const BaseURL = '/admin'
 // 商城相关请求
 const ProductBaseURL = BaseURL + '/product'
+// 用户相关url
+const UsersBase = BaseURL+'/acl/user'
 export default {
   // 用户相关请求
   UserBaseURL: BaseURL + '/acl/index',
@@ -45,4 +47,7 @@ export default {
   SKUDownUrl: ProductBaseURL + '/cancelSale',
   SKUDataUrl: ProductBaseURL + '/getSkuById',
   SKUDelUrl: ProductBaseURL + '/deleteSku',
+  /**************************************用户管理*************************************/
+  UsersInfoUrl: UsersBase + '/',
+
 }

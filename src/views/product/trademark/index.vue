@@ -187,7 +187,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (response, uploadFile) => 
 }
 
 // 获取已有品牌的接口封装为一个函数：在任何情况下想获取数据，只需调用
-const getHasTrademark = async (page = 1) => {
+const getHasTrademark = async () => {
   const result = await reqHasTrademark(pageNo.value, limit.value)
   console.log(result)
   if (result.code == 200) {
