@@ -17,9 +17,9 @@
       <el-table :height="tableHeight" style="margin: 10px 0" :data="usersList">
         <el-table-column type="selection"></el-table-column>
         <el-table-column type="index" label="ID"></el-table-column>
-        <el-table-column label="用户名" prop="username" width="120px"></el-table-column>
-        <el-table-column label="用户名称" prop="name" width="120px"></el-table-column>
-        <el-table-column label="用户职位" prop="roleName" width="550px">
+        <el-table-column label="用户名称" prop="name" width="140px"></el-table-column>
+        <el-table-column label="用户昵称" prop="username" width="140px"></el-table-column>
+        <el-table-column label="用户职位" prop="roleName" width="440px">
           <template #default="{row}">
             <div>
               <el-tag
@@ -35,11 +35,20 @@
         </el-table-column>
         <el-table-column label="创建时间" prop="createTime" show-overflow-tooltip></el-table-column>
         <el-table-column label="更新时间" prop="updateTime" show-overflow-tooltip></el-table-column>
-        <el-table-column label="操作" width="210px">
+        <el-table-column label="操作" width="210px" fixed="right">
           <template #default="{row}">
-            <el-button type="primary" size="small" icon="Avatar" class="cancel_btn">分配角色</el-button>
+            <el-button type="primary" size="small" icon="Avatar" class="cancel_btn" @click="setRole(row)">分配角色</el-button>
             <el-button type="primary" size="small" icon="Edit" class="edit_btn" @click="updateUser(row)"></el-button>
-            <el-button type="primary" size="small" icon="Delete" class="delete_btn"></el-button>
+            <el-popconfirm :title="`你确定要删除: ${row.name}`" @confirm="delUser(row.id)">
+              <template #reference>
+                <el-button
+                  class="delete_btn"
+                  type="primary"
+                  size="small"
+                  icon="Delete"
+                ></el-button>
+              </template>
+            </el-popconfirm>
           </template>
         </el-table-column>
       </el-table>
@@ -58,18 +67,49 @@
     <!-- 抽屉：完成添加用户跟修改用户 -->
     <el-drawer v-model="drawer">
       <template #header>
-        <h4 class="drawer_title">{{ drawerTitle }}</h4>
+        <h4 class="drawer_title">{{ userParams.id?'编辑用户':'添加用户' }}</h4>
       </template>
       <template #default>
         <el-form>
           <el-form-item label="用户姓名">
-            <el-input placeholder="请输入用户名"></el-input>
+            <el-input placeholder="请输入用户名" v-model="userParams.name"></el-input>
           </el-form-item>
           <el-form-item label="用户昵称">
-            <el-input placeholder="请输入用户昵称"></el-input>
+            <el-input placeholder="请输入用户昵称" v-model="userParams.username"></el-input>
           </el-form-item>
-          <el-form-item label="用户密码">
-            <el-input placeholder="请输入用户密码"></el-input>
+          <el-form-item label="用户密码" v-if="!userParams.id">
+            <el-input placeholder="请输入用户密码" v-model="userParams.password"></el-input>
+          </el-form-item>
+        </el-form>
+      </template>
+      <template #footer>
+        <div>
+          <el-button type="primary" class="cancel_btn" @click="cancelUser">取消</el-button>
+          <el-button type="primary" class="custom_button" @click="saveUser">提交</el-button>
+        </div>
+      </template>
+    </el-drawer>
+    <!-- 抽屉：显示分配用户角色 -->
+    <el-drawer v-model="drawerRole">
+      <template #header>
+        <h4 class="drawer_title">分配用户角色</h4>
+      </template>
+      <template #default>
+        <el-form>
+          <el-form-item label="用户昵称">
+            <el-input placeholder="请输入用户昵称" v-model="userParams.username" disabled></el-input>
+          </el-form-item>
+          <el-form-item label="职位列表">
+            <el-checkbox
+              v-model="checkAll"
+              :indeterminate="isIndeterminate"
+              @change="handleCheckAllChange"
+            >全选</el-checkbox>
+            <el-checkbox-group v-model="userRole" @change="handleCheckedCitiesChange">
+              <el-checkbox v-for="role in allRole" :key="role.id" :label="role.name" :value="role">
+                {{ role }}
+              </el-checkbox>
+            </el-checkbox-group>
           </el-form-item>
         </el-form>
       </template>
@@ -84,16 +124,45 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import { reqUsersInfo } from '@/api/acl/users'
+import { computed, onMounted, reactive, ref } from 'vue'
+import { reqDelUser, reqUsersAddOrEdit, reqUsersInfo } from '@/api/acl/users'
+import type { UserObj } from '@/api/acl/users/type'
+import { ElMessage } from 'element-plus'
+import useUserStore from '@/stores/modules/users/user'
 
-const drawer = ref(false)
-const pageNo = ref(1)
-const limit = ref(10)
-const total = ref(0)
-const paginationHeight = ref(310)
-const usersList = ref([])
-const drawerTitle = ref('添加用户')
+const useStore = useUserStore()
+const drawer = ref<boolean>(false)
+const drawerRole = ref<boolean>(false)  // 控制角色分配的抽屉
+const checkAll = ref<boolean>(false)  // 是否全选
+const isIndeterminate = ref<boolean>(true)  // 是否全选
+const pageNo = ref<number>(1)
+const limit = ref<number>(10)
+const total = ref<number>(0)
+const paginationHeight = ref<number>(310)
+const usersList = ref<UserObj>([])
+const allRole = ref<string[]>([
+  "产品经理",
+  "运营专员",
+  "数据分析师",
+  "UI/UX设计师",
+  "供应链管理",
+  "客户服务",
+  "SEO/SEM专员",
+  "社交媒体运营",
+  "财务/会计",
+  "IT支持/开发工程师"
+])
+const userRole = ref<string[]>([])
+const initialUserParams = {
+  id:'',
+  name: '',
+  password: '',
+  phone: '',
+  roleName: '',
+  username: ''
+}
+const oldName = ref<string>('')
+const userParams = reactive<UserObj>(JSON.parse(JSON.stringify(initialUserParams)))
 // 计算 tableHeight，动态返回
 const tableHeight = computed(() => {
   return `calc(100vh - ${paginationHeight.value}px)`
@@ -103,10 +172,22 @@ const tableHeight = computed(() => {
 const splitRoles = (roleName:string) => {
   return roleName ? roleName.split(",") : []
 }
+
+// 全选框
+const handleCheckAllChange = (val:boolean) => {
+  userRole.value = val?allRole.value:[]
+  isIndeterminate.value = false
+}
+
+// 底部复选框change事件
+const handleCheckedCitiesChange = (value:string[]) => {
+  const checkedCount = value.length
+  checkAll.value = checkedCount === allRole.value.length
+  isIndeterminate.value = checkedCount > 0 && checkedCount < allRole.value.length
+}
+
 const getUsers = async () => {
-  console.log('getUsers')
   const result = await reqUsersInfo(pageNo.value, limit.value)
-  console.log(result)
   if (result.code == 200) {
     total.value = result.data.total
     usersList.value = result.data.records
@@ -116,19 +197,25 @@ const setDrawer = (n=1) => {
   drawer.value = n === 1;
 }
 
-const setTitle = (title:string) => {
-  drawerTitle.value = title
+const setDrawerRole = (n=1) => {
+  drawerRole.value = n === 1;
+}
+
+// 分配角色
+const setRole = (user:UserObj) => {
+  setDrawerRole()
+  Object.assign(userParams, user)
 }
 // 添加用户
 const addUser = () => {
-  setTitle('添加用户')
   setDrawer()
-  console.log(drawer.value)
+  Object.assign(userParams, JSON.parse(JSON.stringify(initialUserParams)))
 }
 
 // 更新用户
-const updateUser = async (row:any) => {
-  setTitle('修改用户')
+const updateUser = async (row:UserObj) => {
+  oldName.value = row.username
+  Object.assign(userParams, row)
   setDrawer()
   console.log(row)
 }
@@ -138,10 +225,33 @@ const cancelUser = () => {
 }
 
 // 提交用户
-const saveUser = () => {
+const saveUser = async () => {
   setDrawer(0)
+  const result = await reqUsersAddOrEdit(userParams)
+  if (result.code == 200) {
+    ElMessage.success(userParams.id ? '编辑用户成功' : '添加用户成功')
+    await getUsers()
+    // 校验是否修改的当前账号，如果是，则重新刷新浏览器
+    if (oldName.value == useStore.username){
+      // 浏览器自动刷新一次,避免修改了当前本身的账号信息
+      window.location.reload()
+    }
+  } else {
+    ElMessage.error(userParams.id ? '编辑用户失败' : '添加用户失败')
+  }
+  oldName.value = ''
 }
 
+// 删除用户
+const delUser = async (userId: number | string) => {
+  const result = await reqDelUser(userId)
+  if (result.code == 200) {
+    ElMessage.success('删除用户成功')
+    await getUsers()
+  } else {
+    ElMessage.error('删除用户失败')
+  }
+}
 
 onMounted(() => {
   getUsers()

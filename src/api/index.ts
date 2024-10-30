@@ -49,5 +49,8 @@ export default {
   SKUDelUrl: ProductBaseURL + '/deleteSku',
   /**************************************用户管理*************************************/
   UsersInfoUrl: UsersBase + '/',
+  UsersAddUrl: UsersBase + '/save',
+  UsersEditUrl: UsersBase + '/update',
+  UsersDelUrl: UsersBase + '/remove',
 
 }

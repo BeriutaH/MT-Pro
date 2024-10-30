@@ -141,7 +141,6 @@ const addSku = async () => {
     }
     return prev
   }, [])
-  console.log('skuParams', skuParams)
   const SKUResult = await reqSKUAdd(skuParams)
   if (SKUResult.code == 200) {
     $emit('changeScene', 1)
@@ -169,22 +168,18 @@ const initSkuAdd = async (spuInfo: any) => {
   skuParams.category3Id = spuInfo.p3Id
   skuParams.spuId = spuId
   skuParams.tmId = spuInfo.spuObj.tmId
-  console.log('SKU操作', spuInfo)
   const SPUSaleResult = await reqSPUSale(spuId)
   if (SPUSaleResult.code == 200) {
     spuSaleInfo.value = SPUSaleResult.data
   }
-  console.log('SPUSaleResult', SPUSaleResult)
   const AttrInfoResult = await reqAttrInfoList(spuInfo.p1Id, spuInfo.p2Id, spuInfo.p3Id)
   if (AttrInfoResult.code == 200) {
     spuProductInfo.value = AttrInfoResult.data
   }
-  console.log('AttrInfoResult', AttrInfoResult)
   const SPUImgResult = await reqSPUImage(spuId)
   if (SPUImgResult.code == 200) {
     spuImgInfo.value = SPUImgResult.data
   }
-  console.log('SPUImgResult', SPUImgResult)
 }
 
 // 对外暴露方法，父组件可以调用

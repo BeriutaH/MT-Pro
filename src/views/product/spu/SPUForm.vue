@@ -202,18 +202,15 @@ const getAllInfo = async () => {
   if (trademarkResult.code == 200) {
     trademarkList.value = trademarkResult.data
   }
-  console.log('trademarkListResult', trademarkResult)
   const spuSaleResult = await reqSPUSaleAll()
   if (spuSaleResult.code == 200) {
     saleAllList.value = spuSaleResult.data
   }
-  console.log('saleAllListResult', spuSaleResult)
 }
 // 子组件渲染时需要执行的行为
 const initSpuHas = async (spu: SpuObj) => {
   SpuParams.value = spu
   // 发送四个请求
-  console.log('spu', spu)
   const spuId = spu.id ? spu.id : ''
   await getAllInfo()
   const result2 = await reqSPUImage(spuId)
@@ -226,13 +223,10 @@ const initSpuHas = async (spu: SpuObj) => {
       }
     })
   }
-  console.log('spuImageListResult', result2)
   const result3 = await reqSPUSale(spuId)
   if (result3.code == 200) {
     saleList.value = result3.data
   }
-  console.log('saleListResult', result3)
-  console.log(SpuParams)
 }
 
 //
@@ -256,7 +250,6 @@ const initSpuAdd = async (p3Id: number | string) => {
   saleAttrIdAndName.value = ''
   await getAllInfo()
   SpuParams.value.category3Id = p3Id
-  console.log('添加SPU')
 }
 // 照片墙预览
 const handlePictureCardPreview = (file: any) => {
