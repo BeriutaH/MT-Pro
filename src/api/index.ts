@@ -52,5 +52,8 @@ export default {
   UsersAddUrl: UsersBase + '/save',
   UsersEditUrl: UsersBase + '/update',
   UsersDelUrl: UsersBase + '/remove',
+  UsersBatchDelUrl: UsersBase + '/batchRemove',
+  RoleByUserIdUrl: UsersBase + '/toAssign',
+  RoleToUserUrl: UsersBase + '/doAssignRole',
 
 }

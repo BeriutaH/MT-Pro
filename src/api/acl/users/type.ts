@@ -6,3 +6,14 @@ export interface UserObj {
   roleName: string
   username: string
 }
+
+export interface Role {
+  id: number
+  roleName: string
+  remark: any
+}
+
+export interface UserToRole {
+  roleIdList: number[]
+  userId: number | string
+}
