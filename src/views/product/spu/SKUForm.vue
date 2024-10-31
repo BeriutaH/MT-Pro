@@ -74,7 +74,7 @@
     </el-form-item>
     <el-form-item>
       <div class="button_container">
-        <el-button class="cancel_btn" type="primary" size="default" @click="cancel">取消</el-button>
+        <el-button class="bt_single" size="default" @click="cancel">取消</el-button>
         <el-button class="custom_button" type="primary" size="default" @click="addSku"
           >确认</el-button
         >

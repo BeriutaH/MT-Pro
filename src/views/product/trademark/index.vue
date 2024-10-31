@@ -110,8 +110,8 @@
       </el-form>
       <!-- 具名插槽:footer -->
       <template #footer>
-        <el-button class="cancel_btn" type="primary" size="small" @click="cancel">取消</el-button>
-        <el-button type="primary" size="small" @click="certain">确定</el-button>
+        <el-button class="bt_single" @click="cancel">取消</el-button>
+        <el-button class="custom_button" type="primary" @click="certain">确定</el-button>
       </template>
     </el-dialog>
   </div>

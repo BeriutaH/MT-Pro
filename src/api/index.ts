@@ -4,6 +4,8 @@ const BaseURL = '/admin'
 const ProductBaseURL = BaseURL + '/product'
 // 用户相关url
 const UsersBase = BaseURL+'/acl/user'
+// 角色
+const RoleBase = BaseURL+'/acl/role'
 export default {
   // 用户相关请求
   UserBaseURL: BaseURL + '/acl/index',
@@ -55,5 +57,10 @@ export default {
   UsersBatchDelUrl: UsersBase + '/batchRemove',
   RoleByUserIdUrl: UsersBase + '/toAssign',
   RoleToUserUrl: UsersBase + '/doAssignRole',
-
+  /**************************************角色管理*************************************/
+  RoleInfoUrl: RoleBase + '/',
+  RoleCreatUrl: RoleBase + '/save',
+  RoleEditUrl: RoleBase + '/update',
+  RoleDelUrl: RoleBase + '/remove',
+  RoleBatchDelUrl: RoleBase + '/batchRemove',
 }

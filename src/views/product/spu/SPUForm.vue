@@ -119,7 +119,7 @@
         </el-table>
       </el-form-item>
       <div style="display: flex; justify-content: flex-end">
-        <el-button class="cancel_btn" type="primary" size="default" @click="cancel">返回</el-button>
+        <el-button class="bt_single" size="default" @click="cancel">返回</el-button>
         <el-button
           :disabled="saleList.length <= 0"
           class="custom_button"

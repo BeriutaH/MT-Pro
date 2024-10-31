@@ -38,7 +38,7 @@ export const reqDelUser = (userId:number|string): Promise<ApiResponse> => {
 }
 
 // 批量删除用户
-export const reqBatchDelUser = (userIdList:number|string[]): Promise<ApiResponse> => {
+export const reqBatchDelUser = (userIdList: number[]): Promise<ApiResponse> => {
   return requestWrapper<ApiResponse>({
     url: ApiSetting.UsersBatchDelUrl,
     method: 'DELETE',

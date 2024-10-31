@@ -8,9 +8,11 @@ export interface UserObj {
 }
 
 export interface Role {
-  id: number
+  id?: number|string
+  createTime?: string
+  updateTime?: string
   roleName: string
-  remark: any
+  remark?: any
 }
 
 export interface UserToRole {

@@ -85,7 +85,7 @@
       </template>
       <template #footer>
         <div>
-          <el-button type="primary" class="cancel_btn" @click="cancelUser">取消</el-button>
+          <el-button class="bt_single" @click="cancelUser">取消</el-button>
           <el-button type="primary" class="custom_button" @click="saveUser">提交</el-button>
         </div>
       </template>
@@ -116,7 +116,7 @@
       </template>
       <template #footer>
         <div>
-          <el-button type="primary" class="cancel_btn" @click="cancelUserToRole">取消</el-button>
+          <el-button class="bt_single" @click="cancelUserToRole">取消</el-button>
           <el-button type="primary" class="custom_button" @click="saveUserToRole">提交</el-button>
         </div>
       </template>
@@ -148,7 +148,7 @@ const isIndeterminate = ref<boolean>(true)  // 是否全选
 const pageNo = ref<number>(1)
 const limit = ref<number>(10)
 const total = ref<number>(0)
-const paginationHeight = ref<number>(310)
+const paginationHeight = ref<number>(320)
 const usersList = ref<UserObj[]>([])
 const allRole = ref<Role[]>([])
 const userRole = ref<Role[]>([])
@@ -165,7 +165,7 @@ const initialRoleAndUser = {
   roleIdList:[],
   userId:''
 }
-const userIdList = ref([])
+const userIdList = ref<UserObj[]>([])
 const oldName = ref<string>('')
 const roleAndUser = reactive<UserToRole>(JSON.parse(JSON.stringify(initialRoleAndUser)))
 const userParams = reactive<UserObj>(JSON.parse(JSON.stringify(initialUserParams)))
@@ -205,7 +205,9 @@ const selectChange = (val:UserObj[]) => {
 
 // 批量删除用户
 const batchRemove = async () => {
-  const idList = userIdList.value.map(user => user.id)
+  const idList = userIdList.value
+    .map(user => user.id)
+    .filter((id): id is number => id !== undefined)
   const result = await reqBatchDelUser(idList)
   if (result.code == 200) {
     ElMessage.success('批量删除用户成功')
@@ -257,7 +259,9 @@ const cancelUserToRole = () => {
 }
 // 确定分配角色
 const saveUserToRole = async () => {
-  roleAndUser.roleIdList = userRole.value.map(role => role.id)
+  roleAndUser.roleIdList = userRole.value
+    .map(role => role.id)
+    .filter((id): id is number => id !== undefined)
   console.log('roleAndUser发送数据:', roleAndUser)
   const result = await reqUserToRoles(roleAndUser)
   if (result.code == 200) {
@@ -327,11 +331,6 @@ onMounted(() => {
 }
 .el-form-item {
   margin: 0;
-}
-.bt_single:hover{
-  color: $medium-color;
-  border-color: $medium-color;
-  background-color: $btn-hover-color;
 }
 .el-input {
   width: 200px;

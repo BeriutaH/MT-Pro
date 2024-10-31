@@ -98,8 +98,8 @@
           <el-button class="custom_button" type="primary" size="small" @click="attrSave"
             >确认</el-button
           >
-          <el-button class="cancel_btn" type="primary" size="small" @click="changeScene(1)"
-            >返回</el-button
+          <el-button class="bt_single" size="small" @click="changeScene(1)"
+            >取消</el-button
           >
         </div>
       </div>
