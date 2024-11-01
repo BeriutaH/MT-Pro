@@ -12,7 +12,8 @@ const useUserStore = defineStore('User', {
       token: localStorage.getItem('TOKEN'), // 用户唯一标识
       menuRouters: routers, // 仓库存储生成菜单
       username: null,
-      avatar: null
+      avatar: null,
+      roles:[]
     }
   },
   // 处理异步跟逻辑的地方
@@ -46,6 +47,7 @@ const useUserStore = defineStore('User', {
       if (result.code == 200) {
         this.username = result.data.name
         this.avatar = result.data.avatar
+        this.roles = result.data.roles
         return 'ok'
       } else {
         return Promise.reject(new Error(result.message))

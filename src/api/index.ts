@@ -6,6 +6,7 @@ const ProductBaseURL = BaseURL + '/product'
 const UsersBase = BaseURL+'/acl/user'
 // 角色
 const RoleBase = BaseURL+'/acl/role'
+const PermissionBase = BaseURL+'/acl/permission'
 export default {
   // 用户相关请求
   UserBaseURL: BaseURL + '/acl/index',
@@ -63,4 +64,8 @@ export default {
   RoleEditUrl: RoleBase + '/update',
   RoleDelUrl: RoleBase + '/remove',
   RoleBatchDelUrl: RoleBase + '/batchRemove',
+  /**************************************权限管理*************************************/
+  PermissionUrl: PermissionBase + '/',
+  PermissionByRoleUrl: PermissionBase + '/toAssign',
+  AssignPermissionByRoleUrl: PermissionBase + '/doAssignAcl',
 }
