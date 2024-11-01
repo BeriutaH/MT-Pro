@@ -8,7 +8,8 @@
       <!-- v-if 或 v-show 都可以实现显示与隐藏 -->
       <div v-show="scene == 1">
         <el-button class="custom_button" type="primary" size="default" icon="Plus" @click="addSPU"
-          >添加SPU</el-button>
+          >添加SPU</el-button
+        >
 
         <!-- 表格 -->
         <el-table style="margin: 10px 0" :data="spuArr" :height="tableHeight">

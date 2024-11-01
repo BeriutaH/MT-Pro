@@ -9,8 +9,6 @@ const request = axios.create({
   // timeout: 5000 // 超时时间5秒
 })
 
-
-
 // 请求拦截器
 request.interceptors.request.use(
   (config) => {

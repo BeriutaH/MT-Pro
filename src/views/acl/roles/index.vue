@@ -3,7 +3,11 @@
     <el-card>
       <el-form class="form">
         <el-form-item label="角色名: ">
-          <el-input placeholder="请输入角色名称" style="width: 200px; margin-right: 20px;" v-model="keyWord"></el-input>
+          <el-input
+            placeholder="请输入角色名称"
+            style="width: 200px; margin-right: 20px"
+            v-model="keyWord"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button :disabled="!keyWord" class="bt_single" @click="selectRole">搜索</el-button>
@@ -13,25 +17,31 @@
     </el-card>
     <el-card style="margin: 10px 0">
       <el-button class="custom_button" type="primary" @click="addRole">添加角色</el-button>
-      <!--  @selection-change:  当选择项发生变化时会触发该事件  -->
-      <el-table @selection-change="selectChange" :height="tableHeight" style="margin: 10px 0" :data="roleList">
-        <el-table-column type="selection"></el-table-column>
+      <el-table :height="tableHeight" style="margin: 10px 0" :data="roleList">
         <el-table-column type="index" label="ID"></el-table-column>
-        <el-table-column label="角色名称" prop="roleName" width="240px"></el-table-column>
+        <el-table-column label="角色名称" prop="roleName" width="340px"></el-table-column>
         <el-table-column label="创建时间" prop="createTime" show-overflow-tooltip></el-table-column>
         <el-table-column label="更新时间" prop="updateTime" show-overflow-tooltip></el-table-column>
         <el-table-column label="操作" width="210px" fixed="right" align="center">
-          <template #default="{row}">
-            <el-button type="primary" size="small" icon="Avatar" class="cancel_btn" @click="setPermission(row)">分配权限</el-button>
-            <el-button type="primary" size="small" icon="Edit" class="edit_btn" @click="updateRole(row)"></el-button>
+          <template #default="{ row }">
+            <el-button
+              type="primary"
+              size="small"
+              icon="Avatar"
+              class="cancel_btn"
+              @click="setPermission(row)"
+              >分配权限</el-button
+            >
+            <el-button
+              type="primary"
+              size="small"
+              icon="Edit"
+              class="edit_btn"
+              @click="updateRole(row)"
+            ></el-button>
             <el-popconfirm :title="`你确定要删除: ${row.roleName}`" @confirm="delRole(row.id)">
               <template #reference>
-                <el-button
-                  class="delete_btn"
-                  type="primary"
-                  size="small"
-                  icon="Delete"
-                ></el-button>
+                <el-button class="delete_btn" type="primary" size="small" icon="Delete"></el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -49,7 +59,11 @@
         :total="total"
       />
     </el-card>
-    <el-dialog v-model="dialogFormVisible" :title="roleParams.id?'修改角色':'添加角色'" width="500">
+    <el-dialog
+      v-model="dialogFormVisible"
+      :title="roleParams.id ? '修改角色' : '添加角色'"
+      width="500"
+    >
       <el-form :model="roleParams">
         <el-form-item label="角色名称">
           <el-input v-model="roleParams.roleName" autocomplete="off" />
@@ -83,12 +97,11 @@
       </template>
       <template #footer>
         <div>
-          <el-button class="bt_single" @click="cancelPermission">取消</el-button>
+          <el-button class="bt_single" @click="drawerPermission = false">取消</el-button>
           <el-button type="primary" class="custom_button" @click="savePermission">提交</el-button>
         </div>
       </template>
     </el-drawer>
-
   </div>
 </template>
 
@@ -99,9 +112,12 @@ import { reqDelRole, reqRoleAddOrEdit, reqRoles } from '@/api/acl/role'
 import useSettingStore from '@/stores/modules/setting'
 import { ElMessage, ElTree } from 'element-plus'
 import type { PermissionObj } from '@/api/acl/menu/type'
-import { reqAssignPermissionsByRoleId, reqPermissions, reqPermissionsByRoleId } from '@/api/acl/menu'
+import {
+  reqAssignPermissionsByRoleId,
+  reqPermissions,
+  reqPermissionsByRoleId
+} from '@/api/acl/menu'
 import useUserStore from '@/stores/modules/users/user'
-
 
 const keyWord = ref('')
 const roleList = ref<Role[]>([])
@@ -118,14 +134,13 @@ const drawerPermission = ref(false)
 const treeRef = ref()
 const defaultProps = {
   children: 'children',
-  label: 'name',
+  label: 'name'
 }
 const roleParams = reactive<Role>({
   id: '',
   roleName: ''
 })
 const paginationHeight = ref<number>(320)
-
 
 // 计算 tableHeight，动态返回
 const tableHeight = computed(() => {
@@ -144,11 +159,11 @@ const addRole = async () => {
   editDia(true)
 }
 
-const editDia = (flag:boolean) => {
+const editDia = (flag: boolean) => {
   dialogFormVisible.value = flag
 }
 
-const editDrawer = (flag:boolean) => {
+const editDrawer = (flag: boolean) => {
   drawerPermission.value = flag
 }
 
@@ -156,10 +171,10 @@ const saveRole = async () => {
   editDrawer(false)
   const result = await reqRoleAddOrEdit(roleParams)
   if (result.code == 200) {
-    ElMessage.success(roleParams.id?'修改成功':'创建成功')
+    ElMessage.success(roleParams.id ? '修改成功' : '创建成功')
     await getRoles()
   } else {
-    ElMessage.error(roleParams.id?'修改失败':'创建失败')
+    ElMessage.error(roleParams.id ? '修改失败' : '创建失败')
   }
 }
 
@@ -173,7 +188,7 @@ const reset = () => {
 }
 
 // 获取当前角色的权限
-const setPermission = async (role:Role) => {
+const setPermission = async (role: Role) => {
   roleParams.id = role.id
   roleParams.roleName = role.roleName
   editDrawer(true)
@@ -183,7 +198,7 @@ const setPermission = async (role:Role) => {
     console.log(permissionIdList.value)
     // 等待 DOM 更新
     await nextTick(() => {
-      if (treeRef.value){
+      if (treeRef.value) {
         treeRef.value.setCheckedKeys(permissionIdList.value)
       }
     })
@@ -192,7 +207,6 @@ const setPermission = async (role:Role) => {
   }
 }
 
-
 const getPer = async () => {
   const result = await reqPermissions()
   if (result.code == 200) {
@@ -200,8 +214,8 @@ const getPer = async () => {
   }
 }
 
-const updateRole = (role:Role) => {
-  roleParams.id = role.id?.toString() ?? ""
+const updateRole = (role: Role) => {
+  roleParams.id = role.id?.toString() ?? ''
   roleParams.roleName = role.roleName
   dialogFormVisible.value = true
 }
@@ -212,7 +226,10 @@ const savePermission = async () => {
   const checkedKeys = treeRef.value.getCheckedKeys()
   // 半选中状态通常出现在父节点有子节点被选中而子节点有部分未选中的情况下
   const halfCheckedKeys = treeRef.value.getHalfCheckedKeys()
-  const result = await reqAssignPermissionsByRoleId(roleParams.id as number ,checkedKeys.concat(halfCheckedKeys))
+  const result = await reqAssignPermissionsByRoleId(
+    roleParams.id as number,
+    checkedKeys.concat(halfCheckedKeys)
+  )
   if (result.code == 200) {
     ElMessage.success('分配权限成功')
     if (userStore.roles.includes(roleParams.roleName)) {
@@ -224,15 +241,7 @@ const savePermission = async () => {
   }
 }
 
-const cancelPermission = () => {
-  
-}
-
-const selectChange = () => {
-  
-}
-
-const delRole = async (roleId:number|string) => {
+const delRole = async (roleId: number | string) => {
   const result = await reqDelRole(roleId)
   if (result.code == 200) {
     ElMessage.success('删除成功')
@@ -245,14 +254,14 @@ const delRole = async (roleId:number|string) => {
 // 递归获取最底层的选中的id
 const collectSelectedIds = (nodes: PermissionObj[]): number[] => {
   const selectedIds: number[] = []
-  nodes.forEach(node => {
+  nodes.forEach((node) => {
     // 仅当节点 select 为 true 且没有子节点时才收集 id
     if (node.select && (!node.children || node.children.length === 0)) {
-      selectedIds.push(node.id);
+      selectedIds.push(node.id)
     }
     // 如果有子节点，继续递归遍历
     if (node.children && node.children.length > 0) {
-      selectedIds.push(...collectSelectedIds(node.children));
+      selectedIds.push(...collectSelectedIds(node.children))
     }
   })
   return selectedIds
@@ -272,5 +281,4 @@ onMounted(() => {
 .el-form-item {
   margin: 0;
 }
-
 </style>

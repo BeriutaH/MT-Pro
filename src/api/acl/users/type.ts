@@ -1,5 +1,5 @@
 export interface UserObj {
-  id?:number | string
+  id?: number | string
   name: string
   password: string
   phone: string
@@ -8,7 +8,7 @@ export interface UserObj {
 }
 
 export interface Role {
-  id?: number|string
+  id?: number | string
   createTime?: string
   updateTime?: string
   roleName: string

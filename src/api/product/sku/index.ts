@@ -32,7 +32,7 @@ export const reqSKUAllInfo = (page: number, limit: number): Promise<ApiResponse>
 }
 
 // sku上架 、 下架
-export const reqSKUUpOrDown = (isSale:number, skuId:number|string): Promise<ApiResponse> => {
+export const reqSKUUpOrDown = (isSale: number, skuId: number | string): Promise<ApiResponse> => {
   const url = isSale === 1 ? `${ApiSetting.SKUUpUrl}/${skuId}` : `${ApiSetting.SKUDownUrl}/${skuId}`
   // 获取三级id
   return requestWrapper<ApiResponse>({
@@ -44,7 +44,7 @@ export const reqSKUUpOrDown = (isSale:number, skuId:number|string): Promise<ApiR
 // 根据sku获取商品详情
 export const reqSKUData = (skuId: number | string) => {
   return requestWrapper<ApiResponse>({
-    url:`${ApiSetting.SKUDataUrl}/${skuId}`,
+    url: `${ApiSetting.SKUDataUrl}/${skuId}`,
     method: 'GET'
   })
 }
@@ -52,7 +52,7 @@ export const reqSKUData = (skuId: number | string) => {
 // 删除sku
 export const reqSKUDel = (skuId: number | string) => {
   return requestWrapper<ApiResponse>({
-    url:`${ApiSetting.SKUDelUrl}/${skuId}`,
+    url: `${ApiSetting.SKUDelUrl}/${skuId}`,
     method: 'DELETE'
   })
 }

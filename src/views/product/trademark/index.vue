@@ -26,7 +26,7 @@
         <el-table-column label="品牌LOGO">
           <!-- 插槽 -->
           <template v-slot="{ row }">
-            <img :src="row.logoUrl" alt="图片无法加载"  class="custom_image" />
+            <img :src="row.logoUrl" alt="图片无法加载" class="custom_image" />
           </template>
         </el-table-column>
         <el-table-column label="品牌操作" align="center">

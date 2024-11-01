@@ -13,7 +13,7 @@ const useUserStore = defineStore('User', {
       menuRouters: routers, // 仓库存储生成菜单
       username: null,
       avatar: null,
-      roles:[]
+      roles: []
     }
   },
   // 处理异步跟逻辑的地方

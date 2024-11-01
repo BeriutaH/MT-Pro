@@ -51,20 +51,22 @@
       </div>
       <div v-show="scene == 0">
         <!-- 添加属性与修改数据的结构 -->
-        <el-form :inline="true">
+        <el-form >
           <el-form-item label="属性名称">
-            <el-input placeholder="请输入属性名" v-model="attrParams.attrName"></el-input>
+            <el-input placeholder="请输入属性名" v-model="attrParams.attrName" style="width: 200px"></el-input>
+            <el-button
+              class="custom_button"
+              type="primary"
+              size="default"
+              icon="Plus"
+              :disabled="!attrParams.attrName.trim()"
+              @click="addAttrValue"
+              style="margin-left: 10px"
+            >添加</el-button>
           </el-form-item>
+
         </el-form>
-        <el-button
-          class="custom_button"
-          type="primary"
-          size="small"
-          icon="Plus"
-          :disabled="!attrParams.attrName.trim()"
-          @click="addAttrValue"
-          >添加属性</el-button
-        >
+
         <!--        <el-button type="primary" size="small">取消</el-button>-->
         <el-table style="margin: 10px 0" :data="attrParams.attrValueList">
           <el-table-column label="序号" width="80px" type="index" align="center"></el-table-column>
@@ -95,12 +97,11 @@
           </el-table-column>
         </el-table>
         <div class="button_container">
-          <el-button class="custom_button" type="primary" size="small" @click="attrSave"
+          <el-button class="bt_single" size="default" @click="changeScene(1)">取消</el-button>
+          <el-button class="custom_button" type="primary" size="default" @click="attrSave"
             >确认</el-button
           >
-          <el-button class="bt_single" size="small" @click="changeScene(1)"
-            >取消</el-button
-          >
+
         </div>
       </div>
     </el-card>
@@ -274,7 +275,6 @@ watch(
 
 .button_container {
   position: absolute; /* 绝对定位 */
-  bottom: 20px; /* 距离底部的距离 */
   right: 40px; /* 距离右侧的距离 */
 }
 </style>

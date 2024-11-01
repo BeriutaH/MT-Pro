@@ -25,14 +25,19 @@
         <el-table-column label="操作" fixed="right" width="230px" align="center">
           <!-- row即为已有的SPU对象 -->
           <template v-slot="{ row, $index }">
-            <el-tooltip class="item" effect="dark" :content="row.isSale == 1 ? '下架' : '上架'" placement="top">
-            <el-button
-              :class="row.isSale == 1 ? 'down_bt' : 'custom_button'"
-              type="primary"
-              size="small"
-              :icon="row.isSale == 1 ? 'Bottom' : 'Top'"
-              @click="operateSku(row)"
-            ></el-button>
+            <el-tooltip
+              class="item"
+              effect="dark"
+              :content="row.isSale == 1 ? '下架' : '上架'"
+              placement="top"
+            >
+              <el-button
+                :class="row.isSale == 1 ? 'down_bt' : 'custom_button'"
+                type="primary"
+                size="small"
+                :icon="row.isSale == 1 ? 'Bottom' : 'Top'"
+                @click="operateSku(row)"
+              ></el-button>
             </el-tooltip>
             <el-button
               class="cancel_btn"
@@ -49,7 +54,11 @@
               @click="updateSku()"
             ></el-button>
             <!-- 泡泡按钮 confirm确定时相应的事件  -->
-            <el-popconfirm :title="`你确定要删除: ${row.skuName} ?`" @confirm="delSkuInfo(row.id)" width="300px">
+            <el-popconfirm
+              :title="`你确定要删除: ${row.skuName} ?`"
+              @confirm="delSkuInfo(row.id)"
+              width="300px"
+            >
               <template #reference>
                 <el-button class="delete_btn" type="primary" size="small" icon="Delete"></el-button>
               </template>
@@ -72,10 +81,7 @@
         />
       </div>
       <!--  抽屉组件展示商品详情 -->
-      <el-drawer
-        v-model="drawer"
-        title="商品详情"
-      >
+      <el-drawer v-model="drawer" title="商品详情">
         <template #default>
           <div>
             <el-row>
@@ -93,13 +99,17 @@
             <el-row>
               <el-col :span="6">平台属性</el-col>
               <el-col :span="18">
-                <el-tag v-for="item in skuInfo.skuAttrValueList" :key="item.id">{{ item.valueName }}</el-tag>
+                <el-tag v-for="item in skuInfo.skuAttrValueList" :key="item.id">{{
+                  item.valueName
+                }}</el-tag>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="6">销售属性</el-col>
               <el-col :span="18">
-                <el-tag v-for="i in skuInfo.skuSaleAttrValueList" :key="i.id">{{i.saleAttrValueName}}</el-tag>
+                <el-tag v-for="i in skuInfo.skuSaleAttrValueList" :key="i.id">{{
+                  i.saleAttrValueName
+                }}</el-tag>
               </el-col>
             </el-row>
             <el-row>
@@ -116,7 +126,6 @@
         </template>
       </el-drawer>
     </el-card>
-
   </div>
 </template>
 
@@ -129,107 +138,107 @@ const allSkuList = ref([])
 const pageNo = ref(1)
 const limit = ref(10)
 const total = ref()
-const drawer = ref(false)  // 控制抽屉是否出现
+const drawer = ref(false) // 控制抽屉是否出现
 const skuInfo = ref({
-  "id": 12,
-  "spuId": 3,
-  "price": 9197,
-  "skuName": "Apple iPhone 12 (A2404) 128GB 黑色 支持移动联通电信5G 双卡双待手机",
-  "skuDesc": "Apple iPhone 12 (A2404) 128GB 黑色 支持移动联通电信5G 双卡双待手机",
-  "weight": "1.00",
-  "tmId": 2,
-  "category3Id": 61,
-  "skuDefaultImg": "http://39.98.123.211/group1/M00/00/02/rBHu8l-rgfWAVRWzAABUiOmA0ic932.jpg",
-  "isSale": 1,
-  "createTime": "2021-12-10 09:31:42",
-  "skuImageList": [
-  {
-    "id": 54,
-    "skuId": 12,
-    "imgName": "2689bc534d570eaf.jpg",
-    "imgUrl": "http://39.98.123.211/group1/M00/00/02/rBHu8l-rgfWAO2oYAAEw9kY2VKk982.jpg",
-    "spuImgId": 13,
-    "isDefault": "0"
-  },
-  {
-    "id": 55,
-    "skuId": 12,
-    "imgName": "7ae59d1d962f0965.jpg",
-    "imgUrl": "http://39.98.123.211/group1/M00/00/02/rBHu8l-rgfWAFeQLAAEt9MLZnho584.jpg",
-    "spuImgId": 16,
-    "isDefault": "0"
-  },
-  {
-    "id": 56,
-    "skuId": 12,
-    "imgName": "f73bfe30f5ec641a.jpg",
-    "imgUrl": "http://39.98.123.211/group1/M00/00/02/rBHu8l-rgfWABhwlAAEjBwwVkrI735.jpg",
-    "spuImgId": 18,
-    "isDefault": "0"
-  },
-  {
-    "id": 57,
-    "skuId": 12,
-    "imgName": "7155bba4c363065f.jpg",
-    "imgUrl": "http://39.98.123.211/group1/M00/00/02/rBHu8l-rgfWAVRWzAABUiOmA0ic932.jpg",
-    "spuImgId": 12,
-    "isDefault": "1"
-  }
-],
-  "skuAttrValueList": [
-  {
-    "id": 45,
-    "attrId": 106,
-    "valueId": 175,
-    "skuId": 12,
-    "attrName": "手机一级",
-    "valueName": "苹果手机"
-  },
-  {
-    "id": 46,
-    "attrId": 107,
-    "valueId": 179,
-    "skuId": 12,
-    "attrName": "二级手机",
-    "valueName": "苹果"
-  },
-  {
-    "id": 47,
-    "attrId": 23,
-    "valueId": 14,
-    "skuId": 12,
-    "attrName": "运行内存",
-    "valueName": "4G"
-  },
-  {
-    "id": 48,
-    "attrId": 24,
-    "valueId": 82,
-    "skuId": 12,
-    "attrName": "机身内存",
-    "valueName": "128G"
-  }
-],
-  "skuSaleAttrValueList": [
-  {
-    "id": 23,
-    "skuId": 12,
-    "spuId": 3,
-    "saleAttrValueId": 9,
-    "saleAttrId": 1,
-    "saleAttrName": "颜色",
-    "saleAttrValueName": "黑色"
-  },
-  {
-    "id": 24,
-    "skuId": 12,
-    "spuId": 3,
-    "saleAttrValueId": 14,
-    "saleAttrId": 2,
-    "saleAttrName": "版本",
-    "saleAttrValueName": "128G"
-  }
-]
+  id: 12,
+  spuId: 3,
+  price: 9197,
+  skuName: 'Apple iPhone 12 (A2404) 128GB 黑色 支持移动联通电信5G 双卡双待手机',
+  skuDesc: 'Apple iPhone 12 (A2404) 128GB 黑色 支持移动联通电信5G 双卡双待手机',
+  weight: '1.00',
+  tmId: 2,
+  category3Id: 61,
+  skuDefaultImg: 'http://39.98.123.211/group1/M00/00/02/rBHu8l-rgfWAVRWzAABUiOmA0ic932.jpg',
+  isSale: 1,
+  createTime: '2021-12-10 09:31:42',
+  skuImageList: [
+    {
+      id: 54,
+      skuId: 12,
+      imgName: '2689bc534d570eaf.jpg',
+      imgUrl: 'http://39.98.123.211/group1/M00/00/02/rBHu8l-rgfWAO2oYAAEw9kY2VKk982.jpg',
+      spuImgId: 13,
+      isDefault: '0'
+    },
+    {
+      id: 55,
+      skuId: 12,
+      imgName: '7ae59d1d962f0965.jpg',
+      imgUrl: 'http://39.98.123.211/group1/M00/00/02/rBHu8l-rgfWAFeQLAAEt9MLZnho584.jpg',
+      spuImgId: 16,
+      isDefault: '0'
+    },
+    {
+      id: 56,
+      skuId: 12,
+      imgName: 'f73bfe30f5ec641a.jpg',
+      imgUrl: 'http://39.98.123.211/group1/M00/00/02/rBHu8l-rgfWABhwlAAEjBwwVkrI735.jpg',
+      spuImgId: 18,
+      isDefault: '0'
+    },
+    {
+      id: 57,
+      skuId: 12,
+      imgName: '7155bba4c363065f.jpg',
+      imgUrl: 'http://39.98.123.211/group1/M00/00/02/rBHu8l-rgfWAVRWzAABUiOmA0ic932.jpg',
+      spuImgId: 12,
+      isDefault: '1'
+    }
+  ],
+  skuAttrValueList: [
+    {
+      id: 45,
+      attrId: 106,
+      valueId: 175,
+      skuId: 12,
+      attrName: '手机一级',
+      valueName: '苹果手机'
+    },
+    {
+      id: 46,
+      attrId: 107,
+      valueId: 179,
+      skuId: 12,
+      attrName: '二级手机',
+      valueName: '苹果'
+    },
+    {
+      id: 47,
+      attrId: 23,
+      valueId: 14,
+      skuId: 12,
+      attrName: '运行内存',
+      valueName: '4G'
+    },
+    {
+      id: 48,
+      attrId: 24,
+      valueId: 82,
+      skuId: 12,
+      attrName: '机身内存',
+      valueName: '128G'
+    }
+  ],
+  skuSaleAttrValueList: [
+    {
+      id: 23,
+      skuId: 12,
+      spuId: 3,
+      saleAttrValueId: 9,
+      saleAttrId: 1,
+      saleAttrName: '颜色',
+      saleAttrValueName: '黑色'
+    },
+    {
+      id: 24,
+      skuId: 12,
+      spuId: 3,
+      saleAttrValueId: 14,
+      saleAttrId: 2,
+      saleAttrName: '版本',
+      saleAttrValueName: '128G'
+    }
+  ]
 })
 const getSKU = async () => {
   // 在组件挂载后进行请求
@@ -240,7 +249,7 @@ const getSKU = async () => {
   }
 }
 
-const getSkuById = async (sku:any) => {
+const getSkuById = async (sku: any) => {
   const result = await reqSKUData(sku.id as number)
   if (result.code == 200) {
     skuInfo.value = result.data
@@ -252,8 +261,8 @@ const getSkuById = async (sku:any) => {
 }
 
 // 上架下架
-const operateSku = async (sku:any) => {
-  const isSale = sku.isSale === 1?0:1
+const operateSku = async (sku: any) => {
+  const isSale = sku.isSale === 1 ? 0 : 1
   const result = await reqSKUUpOrDown(isSale, sku.id)
   const action = isSale === 1 ? '上架' : '下架'
   if (result.code === 200) {
@@ -265,7 +274,7 @@ const operateSku = async (sku:any) => {
 }
 
 // 删除sku
-const delSkuInfo = async (skuId:number|string) => {
+const delSkuInfo = async (skuId: number | string) => {
   const result = await reqSKUDel(skuId)
   if (result.code === 200) {
     ElMessage.success(`删除成功`)
@@ -296,14 +305,13 @@ const tableHeight = computed(() => {
   height: 50px; /* 设置分页组件的高度 */
 }
 .down_bt {
-  background-color: #71C2C2;
+  background-color: #71c2c2;
   color: white;
-  border: 2px solid #71C2C2; // 使用 SCSS 变量
+  border: 2px solid #71c2c2; // 使用 SCSS 变量
 }
 
 .down_bt:hover {
   background-color: $light-green-color;
   border: 2px solid $light-green-color;
 }
-
 </style>

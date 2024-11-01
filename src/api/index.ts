@@ -3,10 +3,10 @@ const BaseURL = '/admin'
 // 商城相关请求
 const ProductBaseURL = BaseURL + '/product'
 // 用户相关url
-const UsersBase = BaseURL+'/acl/user'
+const UsersBase = BaseURL + '/acl/user'
 // 角色
-const RoleBase = BaseURL+'/acl/role'
-const PermissionBase = BaseURL+'/acl/permission'
+const RoleBase = BaseURL + '/acl/role'
+const PermissionBase = BaseURL + '/acl/permission'
 export default {
   // 用户相关请求
   UserBaseURL: BaseURL + '/acl/index',
@@ -68,4 +68,6 @@ export default {
   PermissionUrl: PermissionBase + '/',
   PermissionByRoleUrl: PermissionBase + '/toAssign',
   AssignPermissionByRoleUrl: PermissionBase + '/doAssignAcl',
+  PermissionAddUrl: PermissionBase + '/save',
+  PermissionEditUrl: PermissionBase + '/update',
 }
