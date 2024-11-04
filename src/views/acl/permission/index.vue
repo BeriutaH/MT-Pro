@@ -43,7 +43,7 @@
               v-show="row.level !== 1"
               @click="editPermission(row)"
             ></el-button>
-            <el-popconfirm :title="`你确定要删除: ${row.name}`" @confirm="delUser(row.id)">
+            <el-popconfirm :title="`你确定要删除: ${row.name}`" @confirm="delPer(row.id)">
               <template #reference>
                 <el-button
                   v-show="row.level !== 1"
@@ -85,7 +85,7 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
 import type { PermissionObj } from '@/api/acl/menu/type'
-import { reqAssignPermissionsByRoleId, reqPermissions } from '@/api/acl/menu'
+import { reqAssignPermissionsByRoleId, reqDelPermissionsById, reqPermissions } from '@/api/acl/menu'
 import { ElMessage } from 'element-plus'
 
 const permissionData = ref<PermissionObj[]>([])
@@ -115,6 +115,17 @@ const getPermission = async () => {
 const editPermission = (per:PermissionObj) => {
   Object.assign(permissionParams, per)
   dialogFormVisible.value = true
+}
+
+// 删除指定权限
+const delPer = async (prId:number) => {
+  const result = await reqDelPermissionsById(prId)
+  if (result.code == 200) {
+    ElMessage.success('删除权限菜单成功')
+    await getPermission()
+  } else {
+    ElMessage.error('删除权限菜单失败')
+  }
 }
 
 // 提交

@@ -20,6 +20,14 @@ export const reqPermissionsByRoleId = (roleId: number | string): Promise<ApiResp
   })
 }
 
+// 根据角色id删除权限菜单
+export const reqDelPermissionsById = (prId: number | string): Promise<ApiResponse> => {
+  return requestWrapper<ApiResponse>({
+    url: `${ApiSetting.PermissionDelUrl}/${prId}`,
+    method: 'DELETE'
+  })
+}
+
 // 新增/修改权限
 export const reqAssignPermissionsByRoleId = (permission: PermissionObj): Promise<ApiResponse> => {
   let url = ApiSetting.PermissionAddUrl

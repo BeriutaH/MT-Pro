@@ -70,4 +70,5 @@ export default {
   AssignPermissionByRoleUrl: PermissionBase + '/doAssignAcl',
   PermissionAddUrl: PermissionBase + '/save',
   PermissionEditUrl: PermissionBase + '/update',
+  PermissionDelUrl: PermissionBase + '/remove',
 }
