@@ -2,16 +2,16 @@
   <div>
     <el-card>
       <div class="box">
-        <img :src="userStore.avatar" class="avatar">
+        <img :src="userStore.avatar" class="avatar" />
         <div class="bottom">
           <h3 class="title">{{ getTime() }} {{ userStore.username }}</h3>
-          <p class="subtitle"> {{ setting.title }} </p>
+          <p class="subtitle">{{ setting.title }}</p>
         </div>
       </div>
     </el-card>
     <el-card style="margin-top: 20px">
       <div class="wellcome">
-        <img src="@/assets/images/wellcome1.png" style="height: 600px; width: 700px;">
+        <img src="@/assets/images/wellcome1.png" style="height: 600px; width: 700px" />
       </div>
     </el-card>
   </div>
@@ -34,7 +34,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .box {
   display: flex;
-  .avatar{
+  .avatar {
     width: 100px;
     height: 100px;
     border-radius: 50%;

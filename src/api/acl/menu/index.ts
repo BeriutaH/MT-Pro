@@ -45,10 +45,7 @@ export const reqAssignPermissionsByRoleId = (permission: PermissionObj): Promise
 }
 
 // 根据角色id分配权限菜单
-export const reqAddPermissions = (
-  roleId: number,
-  permissions: number[]
-): Promise<ApiResponse> => {
+export const reqAddPermissions = (roleId: number, permissions: number[]): Promise<ApiResponse> => {
   const info: AssignPermission = {
     permissionIdList: permissions,
     roleId: roleId

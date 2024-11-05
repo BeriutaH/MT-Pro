@@ -33,7 +33,8 @@
               icon="Plus"
               class="custom_button"
               style="visibility: hidden"
-            >是占位符</el-button>
+              >是占位符</el-button
+            >
 
             <el-button
               type="primary"
@@ -97,7 +98,7 @@ const initialPerParams = {
   name: '',
   code: '',
   level: 0,
-  pid: 0,
+  pid: 0
 }
 const permissionParams = reactive<PermissionObj>(JSON.parse(JSON.stringify(initialPerParams)))
 
@@ -112,13 +113,13 @@ const getPermission = async () => {
   }
 }
 
-const editPermission = (per:PermissionObj) => {
+const editPermission = (per: PermissionObj) => {
   Object.assign(permissionParams, per)
   dialogFormVisible.value = true
 }
 
 // 删除指定权限
-const delPer = async (prId:number) => {
+const delPer = async (prId: number) => {
   const result = await reqDelPermissionsById(prId)
   if (result.code == 200) {
     ElMessage.success('删除权限菜单成功')
@@ -133,16 +134,16 @@ const savePr = async () => {
   dialogFormVisible.value = false
   const result = await reqAssignPermissionsByRoleId(permissionParams)
   if (result.code == 200) {
-    ElMessage.success(permissionParams.id?'修改权限菜单成功':'添加权限菜单成功')
+    ElMessage.success(permissionParams.id ? '修改权限菜单成功' : '添加权限菜单成功')
     await getPermission()
   } else {
-    ElMessage.error(permissionParams.id?'修改权限菜单失败':'添加权限菜单失败')
+    ElMessage.error(permissionParams.id ? '修改权限菜单失败' : '添加权限菜单失败')
   }
 }
 
-const addPer = (per:PermissionObj) => {
+const addPer = (per: PermissionObj) => {
   Object.assign(permissionParams, JSON.parse(JSON.stringify(initialPerParams)))
-  permissionParams.level = per.level as number + 1
+  permissionParams.level = (per.level as number) + 1
   permissionParams.pid = per.id as number
   dialogFormVisible.value = true
 }

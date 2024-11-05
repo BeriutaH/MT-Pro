@@ -51,9 +51,13 @@
       </div>
       <div v-show="scene == 0">
         <!-- 添加属性与修改数据的结构 -->
-        <el-form >
+        <el-form>
           <el-form-item label="属性名称">
-            <el-input placeholder="请输入属性名" v-model="attrParams.attrName" style="width: 200px"></el-input>
+            <el-input
+              placeholder="请输入属性名"
+              v-model="attrParams.attrName"
+              style="width: 200px"
+            ></el-input>
             <el-button
               class="custom_button"
               type="primary"
@@ -62,9 +66,9 @@
               :disabled="!attrParams.attrName.trim()"
               @click="addAttrValue"
               style="margin-left: 10px"
-            >添加</el-button>
+              >添加</el-button
+            >
           </el-form-item>
-
         </el-form>
 
         <!--        <el-button type="primary" size="small">取消</el-button>-->
@@ -101,7 +105,6 @@
           <el-button class="custom_button" type="primary" size="default" @click="attrSave"
             >确认</el-button
           >
-
         </div>
       </div>
     </el-card>

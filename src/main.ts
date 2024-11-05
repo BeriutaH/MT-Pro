@@ -7,6 +7,8 @@ import '@/styles/index.scss'
 import ElementPlus from 'element-plus'
 // 引入element-plus中文配置
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+// 引入暗黑模式
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import 'element-plus/dist/index.css'
 // 引入自定义插件对象: 注册整个项目全局组件
 import GlobalComponent from '@/components'
