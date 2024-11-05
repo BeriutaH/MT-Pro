@@ -7,7 +7,11 @@
         <Top />
       </div>
       <div class="bottom">
-        <div class="left">左侧</div>
+        <div class="left">
+          <Tourist class="tourist"/>
+          <Sex class="sex"/>
+          <Age class="age"/>
+        </div>
         <div class="center">中间</div>
         <div class="right">右侧</div>
       </div>
@@ -19,6 +23,10 @@
 import { onMounted, ref } from 'vue'
 // 引入子组件
 import Top from '@/components/screen/top/index.vue'
+// 引入左侧三个子组件
+import Tourist from '@/components/screen/tourist/index.vue'
+import Sex from '@/components/screen/sex/index.vue'
+import Age from '@/components/screen/age/index.vue'
 
 // 获取数据大屏展示内容盒子的DOM元素
 const screen = ref()
@@ -66,7 +74,17 @@ const getScale = (w = 1920, h = 1080) => (Math.min(window.innerWidth / w, window
       .left {
         flex: 1;
         height: 1040px;
-        background: #71c2c2;
+        display: flex;
+        flex-direction: column;
+        .tourist {
+          flex: 1;
+        }
+        .sex {
+          flex: 1;
+        }
+        .age {
+          flex: 1;
+        }
       }
 
     }
