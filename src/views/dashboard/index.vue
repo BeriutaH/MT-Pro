@@ -12,7 +12,10 @@
           <Sex class="sex"/>
           <Age class="age"/>
         </div>
-        <div class="center">中间</div>
+        <div class="center">
+          <Map class="map"/>
+<!--          <Line class="line"/>-->
+        </div>
         <div class="right">右侧</div>
       </div>
     </div>
@@ -27,6 +30,10 @@ import Top from '@/components/screen/top/index.vue'
 import Tourist from '@/components/screen/tourist/index.vue'
 import Sex from '@/components/screen/sex/index.vue'
 import Age from '@/components/screen/age/index.vue'
+
+// 引入中间两个子组件
+import Map from '@/components/screen/map/index.vue'
+import Line from '@/components/screen/line/index.vue'
 
 // 获取数据大屏展示内容盒子的DOM元素
 const screen = ref()
@@ -70,6 +77,16 @@ const getScale = (w = 1920, h = 1080) => (Math.min(window.innerWidth / w, window
       }
       .center {
         flex: 2;
+        display: flex;
+        flex-direction: column;
+        //.map {
+        //  flex: 4;
+        //  //background: #00999f;
+        //}
+        //.line {
+        //  flex: 1;
+        //  //background: #065758;
+        //}
       }
       .left {
         flex: 1;
