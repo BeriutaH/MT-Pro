@@ -95,6 +95,8 @@ onMounted(()=>{
 .age_ratio {
   background: url('@/assets/screen/dataScreen-blocks.png') no-repeat;
   background-size: 100% 100%;
+  margin: 10px 0;
+
   .content {
     padding: 20px; // 所有内容内缩 20px，避免紧贴边缘
   }

@@ -1,7 +1,6 @@
 <template>
 <div class="map_ratio">
   <div class="content">
-    <div class="title"><p>地图组件</p></div>
     <div class="map" ref="map"></div>
   </div>
 </div>
@@ -20,6 +19,16 @@ onMounted(()=>{
   let myCharts = echarts.init(map.value)
   // 设置配置项
   myCharts.setOption({
+    title: {
+      text: '全国景区人流量',  // 设置标题文本
+      left: 'center',    // 标题水平居中
+      top: '5%',        // 标题距离顶部 10% 的位置（可以调整为更合适的值）
+      textStyle: {
+        color: '#00f5ff',  // 设置标题的字体颜色
+        fontSize: 24,    // 设置标题字体大小
+        fontWeight: 'bold' // 设置标题字体加粗
+      }
+    },
     geo: {
       map:'china',
       roam: true,  // 鼠标缩放效果
@@ -102,6 +111,18 @@ onMounted(()=>{
               [108.7944,23.833381]
             ]
           },
+          {
+            coords:[
+              [116.41995,40.18994],
+              [109.754859,19.189767]
+            ]
+          },
+          {
+            coords:[
+              [109.754859,19.189767],
+              [116.41995,40.18994]
+            ]
+          },
           ],
         // 是否显示特效
         effect:{
@@ -118,7 +139,7 @@ onMounted(()=>{
             show: true,
             width:1,
             opacity:0.2,
-            curveness:0.3,  // 设置线条的曲度，范围是 0 到 1，`0` 表示直线，`1` 表示曲线
+            curveness:0.2,  // 设置线条的曲度，范围是 0 到 1，`0` 表示直线，`1` 表示曲线
             color:'white'
           }
         }
@@ -151,15 +172,6 @@ onMounted(()=>{
 
   .content {
     padding: 20px; // 所有内容内缩 20px，避免紧贴边缘
-  }
-
-  .title {
-    p {
-      font-size: 20px;
-      color: white;
-      //background: #00999f;
-      //background: #71c2c2;
-    }
   }
   .map {
     margin-top: 10px;

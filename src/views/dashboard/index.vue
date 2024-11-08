@@ -16,7 +16,11 @@
           <Map class="map"/>
 <!--          <Line class="line"/>-->
         </div>
-        <div class="right">右侧</div>
+        <div class="right">
+          <Rank class="rank"/>
+          <Year class="year"/>
+          <Transportation class="transportation"/>
+        </div>
       </div>
     </div>
   </div>
@@ -34,6 +38,12 @@ import Age from '@/components/screen/age/index.vue'
 // 引入中间两个子组件
 import Map from '@/components/screen/map/index.vue'
 import Line from '@/components/screen/line/index.vue'
+
+// 引入右侧三个子组件
+import Rank from '@/components/screen/rank/index.vue'
+import Year from '@/components/screen/year/index.vue'
+import Transportation from '@/components/screen/transportation/index.vue'
+
 
 // 获取数据大屏展示内容盒子的DOM元素
 const screen = ref()
@@ -55,7 +65,8 @@ const getScale = (w = 1920, h = 1080) => (Math.min(window.innerWidth / w, window
 .container {
   width: 100vw;
   height: 100vh;
-  background: url('@/assets/screen/background.jpg') no-repeat;
+  //background: url('@/assets/screen/background.jpg') no-repeat;
+  background: url('@/assets/screen/bg12.png') no-repeat;
   background-size: cover;
 
   .screen {
@@ -74,6 +85,19 @@ const getScale = (w = 1920, h = 1080) => (Math.min(window.innerWidth / w, window
       display: flex;
       .right {
         flex: 1;
+
+        display: flex;
+        flex-direction: column;
+
+        .rank {
+          flex: 1;
+        }
+        .year {
+          flex: 0.8;
+        }
+        .transportation {
+          flex: 1.2;
+        }
       }
       .center {
         flex: 2;
